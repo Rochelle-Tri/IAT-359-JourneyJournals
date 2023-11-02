@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //comment comment
+        //yes it worksssss
     }
 
     //hello can u see my comment
