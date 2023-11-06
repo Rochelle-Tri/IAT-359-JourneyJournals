@@ -1,6 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/nameLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:id="@+id/journeyNameTextView"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="right" />
+
+        <TextView
+            android:id="@+id/userJourneyNameTextView"
+            android:text="   Stanley Park Jog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingRight="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/locationLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location:"
+            android:id="@+id/journeyLocationTextView"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="right" />
+
+        <TextView
+            android:id="@+id/userJourneyLocationTextView"
+            android:text="   Stanley Park"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingRight="10dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/checklistTextView"
+        android:text="Checklist:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:id="@+id/checklistBoxTextView"
+        android:layout_width="match_parent"
+        android:layout_height="232dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/textbox_style"
+        android:hint="Enter a list of items to bring on your journey..."
+        android:padding="10dp"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Journey!"
+        android:textColor="#1D422F"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:background="#84e89f"
+        />
+
+
+
+</LinearLayout>
