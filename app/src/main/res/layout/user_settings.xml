@@ -16,7 +16,7 @@
         tools:ignore="Suspicious0dp">
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/settingsTextView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
@@ -31,7 +31,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/firstNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5sp"
@@ -41,7 +41,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/firstnameEditText"
+                android:id="@+id/firstNameEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/lastNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5sp"
@@ -69,7 +69,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/lastnameEditText"
+                android:id="@+id/lastNameEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,7 +86,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5sp"
@@ -113,7 +113,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/fontTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5sp"
@@ -140,7 +140,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/fontSizeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5sp"
@@ -184,7 +184,6 @@
         android:layout_height="100dp"
         android:layout_weight="1"
         android:textColor="#1D422F"
-
         android:orientation="vertical">
 
         <Button
