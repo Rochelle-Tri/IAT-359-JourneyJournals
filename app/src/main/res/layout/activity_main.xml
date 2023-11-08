@@ -21,8 +21,10 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:onClick="gotoUserSettings"
-            android:layout_marginLeft="270dp"
-            android:text="Settings" />
+            android:layout_marginLeft="255dp"
+            android:textColor="#1D422F"
+            android:background="#84e89f"
+            android:text="Settings >" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,6 +50,8 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="bottom"
             android:onClick="gotoAllTrips"
+            android:textColor="#1D422F"
+            android:background="#84e89f"
             android:text="All Trips" />
 
         <Button
@@ -56,6 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:onClick="gotoNewJourney"
+            android:textColor="#1D422F"
+            android:background="#84e89f"
             android:text="New Journey" />
 
     </LinearLayout>
