@@ -16,7 +16,7 @@
             android:name=".NewJourneyActivity"
             android:exported="false" />
         <activity
-            android:name=".RecyclerActivity"
+            android:name=".JourneyAlbumRecyclerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
