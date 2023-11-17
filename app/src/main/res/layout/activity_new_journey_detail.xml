@@ -47,12 +47,13 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/userJourneyNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:text="   Stanley Park Jog"
+                android:textColor="#8b8b8c"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -73,12 +74,13 @@
                 android:textSize="20sp"
                 android:gravity="right" />
 
-            <TextView
+            <EditText
                 android:id="@+id/userJourneyLocationTextView"
                 android:text="   Stanley Park"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -99,12 +101,13 @@
                 android:textSize="20sp"
                 android:gravity="right" />
 
-            <TextView
+            <EditText
                 android:id="@+id/userJourneyDateTextView"
                 android:text="   MM/DD/YYYY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -125,12 +128,13 @@
                 android:textSize="20sp"
                 android:gravity="right" />
 
-            <TextView
+            <EditText
                 android:id="@+id/userJourneyTimeTextView"
                 android:text="   HH:MM:SS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -163,14 +167,15 @@
             android:text="Add Photos"
             android:textColor="#1D422F" />
 
-        <TextView
-            android:id="@+id/checklistBoxTextView"
+        <EditText
+            android:id="@+id/notesBoxTextView"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="130dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/textbox_style"
-            android:hint="Enter a list of items to bring on your journey..."
+            android:hint="Note anything important during your journey..."
             android:padding="10dp"
+            android:gravity="top"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -194,6 +199,7 @@
 
         <Button
             android:id="@+id/saveButton"
+            android:onClick="saveData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#84e89f"
