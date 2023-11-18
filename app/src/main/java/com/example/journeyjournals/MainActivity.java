@@ -16,17 +16,17 @@ public class MainActivity extends AppCompatActivity {
         //yes it worksssss
     }
 
-    public void gotoAllTrips(View v){
+    public void gotoAllTrips(View view){
         Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
         startActivity(i);
     }
 
-    public void gotoNewJourney(View v){
+    public void gotoNewJourney(View view){
         Intent i = new Intent(this, NewJourneyActivity.class);
         startActivity(i);
     }
 
-    public void gotoUserSettings(View v){
+    public void gotoUserSettings(View view){
         Intent i = new Intent(this, UserSettings.class);
         startActivity(i);
     }

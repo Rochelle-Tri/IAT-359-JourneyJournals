@@ -48,4 +48,8 @@ public class NewJourneyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 }

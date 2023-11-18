@@ -41,4 +41,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 }
