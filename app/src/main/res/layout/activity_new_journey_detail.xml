@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="< Home"
+            android:text="Home"
             android:onClick="goHome"
             android:textColor="#1D422F"
             android:background="#84e89f"

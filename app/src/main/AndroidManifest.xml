@@ -19,6 +19,9 @@
             android:name=".JourneyAlbumRecyclerActivity"
             android:exported="false" />
         <activity
+            android:name=".UserSettings"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
