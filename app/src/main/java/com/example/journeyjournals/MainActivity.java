@@ -2,7 +2,9 @@ package com.example.journeyjournals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +16,19 @@ public class MainActivity extends AppCompatActivity {
         //yes it worksssss
     }
 
-    //hello can u see my comment
-    //hello again... 2nd commit
+    public void gotoAllTrips(View v){
+        Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
+        startActivity(i);
+    }
+
+    public void gotoNewJourney(View v){
+        Intent i = new Intent(this, NewJourneyActivity.class);
+        startActivity(i);
+    }
+
+    public void gotoUserSettings(View v){
+        Intent i = new Intent(this, UserSettings.class);
+        startActivity(i);
+    }
+
 }
