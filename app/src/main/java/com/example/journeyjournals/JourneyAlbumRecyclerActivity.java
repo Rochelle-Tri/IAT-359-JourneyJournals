@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -57,5 +58,10 @@ public class JourneyAlbumRecyclerActivity extends Activity implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+    }
+
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }
