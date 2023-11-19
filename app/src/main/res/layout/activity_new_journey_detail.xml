@@ -35,7 +35,7 @@
             android:id="@+id/nameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -53,8 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="   Stanley Park Jog"
-                android:textColor="#8b8b8c"
+                android:hint="   Stanley Park Jog"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -63,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/locationLayout">
 
             <TextView
@@ -77,11 +76,10 @@
 
             <EditText
                 android:id="@+id/userJourneyLocationTextView"
-                android:text="   Stanley Park"
+                android:hint="   Stanley Park"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -90,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/dateLayout">
 
             <TextView
@@ -104,11 +102,10 @@
 
             <EditText
                 android:id="@+id/userJourneyDateTextView"
-                android:text="   MM/DD/YYYY"
+                android:hint="   MM/DD/YYYY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -117,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/timeLayout">
 
             <TextView
@@ -131,11 +128,10 @@
 
             <EditText
                 android:id="@+id/userJourneyTimeTextView"
-                android:text="   HH:MM:SS"
+                android:hint="   HH:MM:SS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:textColor="#8b8b8c"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -145,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/notesLayout">
 
         <TextView
@@ -155,29 +151,31 @@
             android:id="@+id/journeyNotesTextView"
             android:textStyle="bold"
             android:textSize="20sp"
+            android:layout_marginBottom="10dp"
             android:gravity="right"/>
+
+        <EditText
+            android:id="@+id/notesBoxTextView"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textbox_style"
+            android:gravity="top"
+            android:hint="Note anything important during your journey..."
+            android:padding="10dp"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/addPhotosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="addPhotos"
+            android:layout_gravity="right"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="245dp"
             android:background="#84e89f"
+            android:onClick="addPhotos"
             android:text="Add Photos"
             android:textColor="#1D422F" />
 
-        <EditText
-            android:id="@+id/notesBoxTextView"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/textbox_style"
-            android:hint="Note anything important during your journey..."
-            android:padding="10dp"
-            android:gravity="top"
-            android:textSize="18sp" />
 
     </LinearLayout>
 

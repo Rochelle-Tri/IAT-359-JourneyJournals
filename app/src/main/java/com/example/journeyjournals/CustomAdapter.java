@@ -1,6 +1,7 @@
 package com.example.journeyjournals;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             Toast.makeText(context,
                     "You have clicked: " + ((TextView)view.findViewById(R.id.albumJourneyNameTextView)).getText().toString(),
                     Toast.LENGTH_SHORT).show();
+
+            int position = getAdapterPosition();
+            Intent intent = new Intent (view.getContext(), NewJournalDetailActivity.class);
+            intent.putExtra ("ITEM_KEY", position );
+            view.getContext().startActivity(intent);
         }
     }
 
