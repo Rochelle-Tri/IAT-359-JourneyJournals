@@ -1,14 +1,22 @@
 package com.example.journeyjournals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewJournalDetailActivity extends AppCompatActivity {
+public class NewJournalDetailActivity extends AppCompatActivity{
 
     EditText journeyName, journeyLocation, journeyDate, journeyDuration, journeyNotes;
     MyDataBase db;
@@ -23,6 +31,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         journeyDate = (EditText)findViewById(R.id.userJourneyDateTextView);
         journeyDuration = (EditText)findViewById(R.id.userJourneyTimeTextView);
         journeyNotes = (EditText)findViewById(R.id.notesBoxTextView);
+
+
+
     }
     public void saveData (View view) {
         String name = journeyName.getText().toString();
@@ -46,4 +57,5 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
 }
