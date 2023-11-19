@@ -129,13 +129,13 @@
                     android:id="@+id/radioOn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="On"
+                    android:text="Turn On Sensor"
                     android:textSize="20sp" />
                 <RadioButton
                     android:id="@+id/radioOff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Off"
+                    android:text="Turn Off Sensor"
                     android:checked="true"
                     android:textSize="20sp" />
 
