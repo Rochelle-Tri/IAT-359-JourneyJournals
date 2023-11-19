@@ -31,57 +31,57 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:layout_marginBottom="20dp"
         android:id="@+id/nameLayout">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"
+            android:text="Before starting your journey, please make a checklist of everything you need to bring."
             android:id="@+id/journeyNameTextView"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:gravity="right" />
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:gravity="left" />
 
-        <EditText
-            android:id="@+id/userJourneyNameTextView"
-            android:text="   Stanley Park Jog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#8b8b8c"
-            android:paddingRight="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/locationLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location:"
-            android:id="@+id/journeyLocationTextView"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:gravity="right" />
-
-        <EditText
-            android:id="@+id/userJourneyLocationTextView"
-            android:text="   Stanley Park"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#8b8b8c"
-            android:paddingRight="10dp"/>
+<!--        <EditText-->
+<!--            android:id="@+id/userJourneyNameTextView"-->
+<!--            android:text="   Stanley Park Jog"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="#8b8b8c"-->
+<!--            android:paddingRight="10dp"/>-->
 
     </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:id="@+id/locationLayout">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Location:"-->
+<!--            android:id="@+id/journeyLocationTextView"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="20sp"-->
+<!--            android:gravity="right" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/userJourneyLocationTextView"-->
+<!--            android:text="   Stanley Park"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="#8b8b8c"-->
+<!--            android:paddingRight="10dp"/>-->
+
+<!--    </LinearLayout>-->
 
     <TextView
         android:id="@+id/checklistTextView"
