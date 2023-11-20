@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class JourneyAlbumRecyclerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class JourneyAlbumRecyclerActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private RecyclerView myRecycler;
     private MyDataBase db;
@@ -105,82 +105,82 @@ public class JourneyAlbumRecyclerActivity extends Activity implements AdapterVie
 
     //light sensor code ---------------------------------------------------------------------------------------------
 
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        Log.d("NewJourneyActivity", "I am being called");
-//        retrieveUserSetting();
-//
-//        int backgroundColor = getInitialBackgroundColor();
-//        updateBackgroundColor(backgroundColor);
-//
-//        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-//        Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-//        if (lightSensor != null) {
-//            sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
-//        }
-//
-//
-//    }
-//    protected void onPause(){
-//        super.onPause();
-//        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-//        sensorManager.unregisterListener(sensorListener);
-//    }
-//
-//    private int getInitialBackgroundColor(){
-//        SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS, MODE_PRIVATE);
-//        return preferences.getInt("backgroundColor", DEFAULT_COLOR);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-//            // Check if user disabled light sensor in settings
-//            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
-//
-//            // Retrieve user settings and update UI
-//            retrieveUserSetting();
-//        }
-//    }
-//
-//    private void retrieveUserSetting(){
-//
-//        SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS, MODE_PRIVATE);
-//        lightSensorEnabled = preferences.getBoolean("LightSensorEnabled", true);
-//
-//        int backgroundColor = preferences.getInt("backgroundColor", DEFAULT_COLOR);
-//        Log.d("NewJourneyActivity", "Retrieved Background Color: " + backgroundColor);
-//        Log.d("NewJourneyActivity", "I am being called");
-//        updateBackgroundColor(backgroundColor);
-//
-//    }
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//    }
-//
-//    private void updateBackgroundColor(int color){
-//        Log.d("MainActivityCheck", "Updating Background Color: " + color);
-//        int bgColor = (color == Color.WHITE) ? Color.WHITE : Color.BLACK;
-//        getWindow().getDecorView().setBackgroundColor(bgColor);
-//
-//    }
-//
-//    private final SensorEventListener sensorListener = new SensorEventListener(){
-//        @Override
-//        public void onSensorChanged(SensorEvent event) {
-//            float lightIntensity = event.values[0];
-//
-//            LightSensorFunction.handleLightSensorChange( this, lightIntensity, lightSensorEnabled);
-//
-//        }
-//
-//        @Override
-//        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-//
-//        }
-//    };
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d("NewJourneyActivity", "I am being called");
+        retrieveUserSetting();
+
+        int backgroundColor = getInitialBackgroundColor();
+        updateBackgroundColor(backgroundColor);
+
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if (lightSensor != null) {
+            sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
+        }
+
+
+    }
+    protected void onPause(){
+        super.onPause();
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.unregisterListener(sensorListener);
+    }
+
+    private int getInitialBackgroundColor(){
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS, MODE_PRIVATE);
+        return preferences.getInt("backgroundColor", DEFAULT_COLOR);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            // Check if user disabled light sensor in settings
+            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
+
+            // Retrieve user settings and update UI
+            retrieveUserSetting();
+        }
+    }
+
+    private void retrieveUserSetting(){
+
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS, MODE_PRIVATE);
+        lightSensorEnabled = preferences.getBoolean("LightSensorEnabled", true);
+
+        int backgroundColor = preferences.getInt("backgroundColor", DEFAULT_COLOR);
+        Log.d("NewJourneyActivity", "Retrieved Background Color: " + backgroundColor);
+        Log.d("NewJourneyActivity", "I am being called");
+        updateBackgroundColor(backgroundColor);
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    private void updateBackgroundColor(int color){
+        Log.d("MainActivityCheck", "Updating Background Color: " + color);
+        int bgColor = (color == Color.WHITE) ? Color.WHITE : Color.BLACK;
+        getWindow().getDecorView().setBackgroundColor(bgColor);
+
+    }
+
+    private final SensorEventListener sensorListener = new SensorEventListener(){
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float lightIntensity = event.values[0];
+
+            LightSensorFunction.handleLightSensorChange( JourneyAlbumRecyclerActivity.this, lightIntensity, lightSensorEnabled);
+
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
 }
