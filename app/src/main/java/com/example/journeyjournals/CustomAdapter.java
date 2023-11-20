@@ -75,7 +75,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     Toast.LENGTH_SHORT).show();
 
             int position = getAdapterPosition();
-            Intent intent = new Intent (view.getContext(), NewJournalDetailActivity.class);
+            Intent intent = new Intent (view.getContext(), EditJournalDetailActivity.class);
             intent.putExtra ("ITEM_KEY", position );
             view.getContext().startActivity(intent);
         }

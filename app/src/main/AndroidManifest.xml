@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JourneyJournals"
         tools:targetApi="31">
+        <activity
+            android:name=".EditJournalDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".NewJournalDetailActivity"
             android:exported="false" />
