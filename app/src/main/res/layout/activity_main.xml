@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello User!"
+            android:textSize="20dp"
             android:id="@+id/welcomeUser"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,12 +49,12 @@
             android:id="@+id/allTrips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_gravity="bottom"
-            android:onClick="gotoAllTrips"
-            android:textColor="#1D422F"
+            android:layout_marginBottom="10dp"
             android:background="#84e89f"
-            android:text="All Trips" />
+            android:onClick="gotoAllTrips"
+            android:text="All Journeys"
+            android:textColor="#1D422F" />
 
         <Button
             android:id="@+id/newTrip"
