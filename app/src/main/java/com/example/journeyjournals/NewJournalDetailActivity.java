@@ -45,41 +45,24 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         journeyNotesTV = (EditText)findViewById(R.id.notesBoxTextView);
 
         db = new MyDataBase(this);
-        Cursor cursor = db.getData();
-
-        //get the info from each column
-//        int index1 = cursor.getColumnIndex(Constants.NAME);
-//        int index2 = cursor.getColumnIndex(Constants.LOCATION);
-//        int index3 = cursor.getColumnIndex(Constants.DATE);
-//        int index4 = cursor.getColumnIndex(Constants.DURATION);
-//        int index5 = cursor.getColumnIndex(Constants.NOTES);
-//
-//        if (cursor != null && cursor.moveToFirst()) {
-//            String journeyName = cursor.getString(index1);
-//            String journeyLocation = cursor.getString(index2);
-//            String journeyDate = cursor.getString(index3);
-//            String journeyDuration = cursor.getString(index4);
-//            String journeyNotes = cursor.getString(index5);
-//
-//            // update text view to show corresponding journey details
-//            journeyNameTV.setText(journeyName);
-//            journeyLocationTV.setText(journeyLocation);
-//            journeyDateTV.setText(journeyDate);
-//            journeyDurationTV.setText(journeyDuration);
-//            journeyNotesTV.setText(journeyNotes);
-//        }
 
         // Retrieve the entry ID from Intent extras
 //        Bundle extra_data = getIntent().getExtras();
-//        entryId = extra_data.getInt("ITEM_KEY");
+//        if (extra_data!= null) {
+//            // retrieve value from bundle (supply the key, get the value)
+//            entryId = extra_data.getInt("ITEM_KEY");
+//            entryId = entryId + 1;
+//            loadDetailsFromDatabase();
+//            journeyNameTV.setText(name);
+//            journeyLocationTV.setText(location);
+//            journeyDateTV.setText(date);
+//            journeyDurationTV.setText(duration);
+//            journeyNotesTV.setText(notes);
 //
-//        // Load other details from the database using the entry ID
-//        loadDetailsFromDatabase();
-//        journeyNameTV.setText(name);
-//        journeyLocationTV.setText(location);
-//        journeyDateTV.setText(date);
-//        journeyDurationTV.setText(duration);
-//        journeyNotesTV.setText(notes);
+//        } else {
+//            // did not receive bundle with extra data
+//            Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
+//        }
 
         //light sensor----------------------------------------------------------------------------------------------
         lightSensorFunction = new LightSensorFunction();
@@ -153,6 +136,36 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 //        // Close the database
 //        db.close();
 //    }
+//private void loadDetailsFromDatabase() {
+//    MyHelper helper = new MyHelper(this);
+//    SQLiteDatabase db = helper.getReadableDatabase();
+//
+//    // Define your query and columns
+//    String selection = "_id=?";
+//    String[] selectionArgs = {String.valueOf(entryId)};
+//
+//    String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES};
+//
+//    try {
+//        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+//
+//        if (cursor != null && cursor.moveToFirst()) {
+//            name = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NAME));
+//            location = cursor.getString(cursor.getColumnIndexOrThrow(Constants.LOCATION));
+//            date = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DATE));
+//            duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
+//            notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
+//
+//            // Close the cursor
+//            cursor.close();
+//        }
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    } finally {
+//        // Close the database
+//        db.close();
+//    }
+//}
 
     //light sensor code ---------------------------------------------------------------------------------------------
 
