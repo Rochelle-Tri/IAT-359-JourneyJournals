@@ -110,6 +110,12 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void addPhotos(View view){
+        Intent i = new Intent(this, CameraActivity.class);
+        startActivity(i);
+        Log.d("CameraActivity", "Failed to Start");
+    }
+
 //    private void loadDetailsFromDatabase() {
 //
 //        MyHelper helper = new MyHelper(this);

@@ -16,15 +16,13 @@
 
         <Button
             android:id="@+id/userSettings"
-            android:layout_width="wrap_content"
+            android:layout_width="121dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="250dp"
+            android:layout_gravity="right"
             android:layout_marginBottom="10dp"
             android:background="#84e89f"
             android:onClick="gotoUserSettings"
-            android:text="Settings"
-            android:textColor="#1D422F" />
+            android:text="Settings" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,8 +51,7 @@
             android:layout_marginBottom="10dp"
             android:background="#84e89f"
             android:onClick="gotoAllTrips"
-            android:text="All Journeys"
-            android:textColor="#1D422F" />
+            android:text="All Journeys" />
 
         <Button
             android:id="@+id/newTrip"
@@ -62,7 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:onClick="gotoNewJourney"
-            android:textColor="#1D422F"
             android:background="#84e89f"
             android:text="New Journey" />
 

@@ -6,6 +6,9 @@
         android:name="android.hardware.sensor.light"
         android:required="true" />
 
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JourneyJournals"
         tools:targetApi="31">
+
         <activity
             android:name=".EditJournalDetailActivity"
             android:exported="false" />
@@ -27,6 +31,9 @@
             android:exported="false" />
         <activity
             android:name=".JourneyAlbumRecyclerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CameraActivity"
             android:exported="false" />
         <activity
             android:name=".UserSettings"
