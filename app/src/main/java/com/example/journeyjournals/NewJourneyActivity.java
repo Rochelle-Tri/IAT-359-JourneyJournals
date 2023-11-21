@@ -62,11 +62,8 @@ public class NewJourneyActivity extends AppCompatActivity {
     }
 
     public void viewJourneyDetails (View view) {
-//        String name = journeyName.getText().toString();
-//        String location = journeyLocation.getText().toString();
+
         String checkList = journeyChecklist.getText().toString();
-//        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-//        long id = db.insertInitialData(name, location, checkList);
         long id = db.insertInitialData(checkList);
         if (id < 0)
         {
@@ -76,13 +73,10 @@ public class NewJourneyActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
-//        journeyName.setText("");
-//        journeyLocation.setText("");
         journeyChecklist.setText("");
 
         //go to details view of this journey
         Intent intent = new Intent(this, NewJournalDetailActivity.class);
-        Toast.makeText(this, "go to recyclerView",Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

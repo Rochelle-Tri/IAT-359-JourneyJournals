@@ -93,7 +93,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String newDate = journeyDateTV.getText().toString();
         String newDuration = journeyDurationTV.getText().toString();
         String newNotes = journeyNotesTV.getText().toString();
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "your journal has been updated", Toast.LENGTH_SHORT).show();
         //entryId = entryId -1;
         db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
     }
