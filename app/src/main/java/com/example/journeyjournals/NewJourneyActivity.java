@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class NewJourneyActivity extends AppCompatActivity {
 
-    EditText journeyName, journeyLocation, journeyChecklist;
+    EditText journeyChecklist;
     MyDataBase db;
 
     //light sensor stuff-------------------------------------------
@@ -32,8 +32,6 @@ public class NewJourneyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_journey);
-//        journeyName = (EditText)findViewById(R.id.userJourneyNameTextView);
-//        journeyLocation = (EditText)findViewById(R.id.userJourneyLocationTextView);
         journeyChecklist = (EditText)findViewById(R.id.checklistBoxTextView);
 
         db = new MyDataBase(this);
@@ -61,6 +59,7 @@ public class NewJourneyActivity extends AppCompatActivity {
         }
     }
 
+    //the user "starts their journey" after they finish writing their checklist
     public void viewJourneyDetails (View view) {
 
         String checkList = journeyChecklist.getText().toString();
