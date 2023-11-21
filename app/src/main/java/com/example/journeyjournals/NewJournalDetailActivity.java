@@ -22,9 +22,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
 
-    String name, location, date, duration, notes;
     private MyDataBase db;
-    private int entryId;
 
     //light sensor stuff-------------------------------------------
     private LightSensorFunction lightSensorFunction;
@@ -45,24 +43,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         journeyNotesTV = (EditText)findViewById(R.id.notesBoxTextView);
 
         db = new MyDataBase(this);
-
-        // Retrieve the entry ID from Intent extras
-//        Bundle extra_data = getIntent().getExtras();
-//        if (extra_data!= null) {
-//            // retrieve value from bundle (supply the key, get the value)
-//            entryId = extra_data.getInt("ITEM_KEY");
-//            entryId = entryId + 1;
-//            loadDetailsFromDatabase();
-//            journeyNameTV.setText(name);
-//            journeyLocationTV.setText(location);
-//            journeyDateTV.setText(date);
-//            journeyDurationTV.setText(duration);
-//            journeyNotesTV.setText(notes);
-//
-//        } else {
-//            // did not receive bundle with extra data
-//            Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
-//        }
 
         //light sensor----------------------------------------------------------------------------------------------
         lightSensorFunction = new LightSensorFunction();
@@ -101,7 +81,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -136,36 +116,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 //        // Close the database
 //        db.close();
 //    }
-//private void loadDetailsFromDatabase() {
-//    MyHelper helper = new MyHelper(this);
-//    SQLiteDatabase db = helper.getReadableDatabase();
-//
-//    // Define your query and columns
-//    String selection = "_id=?";
-//    String[] selectionArgs = {String.valueOf(entryId)};
-//
-//    String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES};
-//
-//    try {
-//        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-//
-//        if (cursor != null && cursor.moveToFirst()) {
-//            name = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NAME));
-//            location = cursor.getString(cursor.getColumnIndexOrThrow(Constants.LOCATION));
-//            date = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DATE));
-//            duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
-//            notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
-//
-//            // Close the cursor
-//            cursor.close();
-//        }
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    } finally {
-//        // Close the database
-//        db.close();
-//    }
-//}
 
     //light sensor code ---------------------------------------------------------------------------------------------
 
