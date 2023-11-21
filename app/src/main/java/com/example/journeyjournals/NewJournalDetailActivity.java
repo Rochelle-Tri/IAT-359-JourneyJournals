@@ -83,6 +83,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
         }
+        finish();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void goHome(View view){
