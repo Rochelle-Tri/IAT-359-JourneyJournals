@@ -263,4 +263,12 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 //            cameraProvider.unbindAll();
 //        }
 //    }
+
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    public void goBack(View view){
+        finish();
+    }
 }

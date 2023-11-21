@@ -16,20 +16,18 @@
 <!--        android:layout_marginBottom="20dp"-->
 <!--        android:layout_weight="2" />-->
 
-
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        android:text="Home"
-        android:onClick="goHome"
-        android:background="#B9F6C9"
-        android:layout_marginRight="10dp"
-        android:textSize="20sp" />
-
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Home"
+            android:onClick="goHome"
+            android:background="#B9F6C9"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp" />
 
 
     <ImageView
@@ -59,12 +57,32 @@
 
         <Button
             android:id="@+id/buttonCaptureShow"
-            android:layout_width="208dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#84e89f"
             android:text="Quick Shot And Display" />
 
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Back"
+            android:onClick="goBack"
+            android:background="#B9F6C9"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
