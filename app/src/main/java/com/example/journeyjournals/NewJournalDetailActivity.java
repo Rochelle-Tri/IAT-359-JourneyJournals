@@ -93,10 +93,15 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void addPhotos(View view){
+    public void takePhotos(View view){
         Intent i = new Intent(this, CameraActivity.class);
         startActivity(i);
         Log.d("CameraActivity", "Failed to Start");
+    }
+
+    public void viewPhotos(View view){
+        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+        Log.d("CameraActivity", "Test");
     }
 
 //    private void loadDetailsFromDatabase() {

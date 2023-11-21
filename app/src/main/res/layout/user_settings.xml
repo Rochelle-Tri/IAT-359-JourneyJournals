@@ -51,60 +51,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/fontTypeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="5sp"
-                android:text="Font Type: "
-                android:textStyle="bold"
-
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/fontTypeEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="This will be drop down maybe"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/fontSizeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="5sp"
-                android:text="Font Size: "
-                android:textStyle="bold"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/fontSizeEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Font Size"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

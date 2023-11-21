@@ -31,7 +31,7 @@
 
 
     <ImageView
-        android:id="@+id/imageViewCapturedImg"
+        android:id="@+id/viewCapturedImg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -47,21 +47,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCaptureSave"
-            android:layout_width="wrap_content"
+            android:id="@+id/photoSave"
+            android:layout_width="107dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="10dp"
             android:background="#84e89f"
-            android:text="Quick Save" />
+            android:text="Save" />
 
         <Button
-            android:id="@+id/buttonCaptureShow"
-            android:layout_width="wrap_content"
+            android:id="@+id/cameraShotAndShow"
+            android:layout_width="199dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#84e89f"
-            android:text="Quick Shot And Display" />
+            android:text="Capture And Display" />
 
 
     </LinearLayout>

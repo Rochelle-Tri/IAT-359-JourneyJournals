@@ -1,5 +1,6 @@
 package com.example.journeyjournals;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -44,9 +45,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     PreviewView previewView;
     private CameraProvider cameraProvider;
 
-    private Button buttonCaptureSave, buttonCaptureShow;
+    private Button photoSave, cameraShotAndShow;
     private ImageCapture imageCapture;
-    private ImageView imageViewCaptured;
+    private ImageView viewCapturedImg;
 
     private static final int img_id = 1;
 
@@ -55,17 +56,18 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        Button buttonCaptureSave = findViewById(R.id.buttonCaptureSave);
-        Button buttonCaptureShow = findViewById(R.id.buttonCaptureShow);
-        imageViewCaptured = findViewById(R.id.imageViewCapturedImg);
+        Button photoSave = findViewById(R.id.photoSave);
+        Button cameraShotAndShow = findViewById(R.id.cameraShotAndShow);
+        viewCapturedImg = findViewById(R.id.viewCapturedImg);
 
-        buttonCaptureSave.setOnClickListener(this);
-        buttonCaptureShow.setOnClickListener(this);
+        photoSave.setOnClickListener(this);
+        cameraShotAndShow.setOnClickListener(this);
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
@@ -142,9 +144,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
         int viewId = view.getId();
 
-        if (viewId == R.id.buttonCaptureSave) {
+        if (viewId == R.id.photoSave) {
             capturePhoto();
-        } else if (viewId == R.id.buttonCaptureShow) {
+        } else if (viewId == R.id.cameraShotAndShow) {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, img_id);
         }
@@ -156,21 +158,21 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 //        Bitmap photo = (Bitmap) data.getExtras().get("data");
 //        imageViewCaptured.setImageBitmap(photo);
 
-        // Check if the result is OK and data is not null
+        //check if the result is OK and data is not null
         if (resultCode == RESULT_OK && data != null) {
             Bundle extras = data.getExtras();
 
-            // Check if extras is not null
+            //check if extras is not null
             if (extras != null) {
                 // Perform your operations with data
                 Bitmap photo = (Bitmap) extras.get("data");
-                imageViewCaptured.setImageBitmap(photo);
+                viewCapturedImg.setImageBitmap(photo);
             } else {
-                // Handle the case where extras is null
+                //case where extras is null
                 Toast.makeText(this, "No data received", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // Handle the case where the result is not OK
+            //case where the result is not OK
             Toast.makeText(this, "Image capture failed", Toast.LENGTH_SHORT).show();
         }
     }
