@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class JourneyAlbumRecyclerActivity extends AppCompatActivity implements A
     private boolean lightSensorEnabled = true;
     final int REQUEST_CODE = 0;
 
+    private TextView emptyAlbum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,13 @@ public class JourneyAlbumRecyclerActivity extends AppCompatActivity implements A
         db = new MyDataBase(this);
         helper = new MyHelper(this);
         Cursor cursor = db.getData();
+
+//        if(helper.isTableEmpty()){
+//            emptyAlbum.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            emptyAlbum.setVisibility(View.GONE);
+//        }
 
        //get the info from each column
         int index1 = cursor.getColumnIndex(Constants.NAME);

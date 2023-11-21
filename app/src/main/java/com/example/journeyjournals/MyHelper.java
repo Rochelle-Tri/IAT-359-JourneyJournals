@@ -1,6 +1,7 @@
 package com.example.journeyjournals;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -45,5 +46,19 @@ public class MyHelper extends SQLiteOpenHelper {
         } catch (SQLException e) {
             Toast.makeText(context, "exception onUpgrade() db", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public boolean isTableEmpty() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT 1 FROM " + Constants.TABLE_NAME + " LIMIT 1";
+        Cursor cursor = db.rawQuery(query, null);
+
+        boolean isEmpty = (cursor.getCount() == 0);
+
+        cursor.close();
+        db.close();
+
+        return isEmpty;
     }
 }
