@@ -83,11 +83,25 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
         }
+        finish();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void goHome(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void takePhotos(View view){
+        Intent i = new Intent(this, CameraActivity.class);
+        startActivity(i);
+        Log.d("CameraActivity", "Failed to Start");
+    }
+
+    public void viewPhotos(View view){
+        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+        Log.d("CameraActivity", "Test");
     }
 
 //    private void loadDetailsFromDatabase() {

@@ -50,7 +50,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         if (extra_data!= null) {
             // retrieve value from bundle (supply the key, get the value)
             entryId = extra_data.getInt("ITEM_KEY");
-            entryId = entryId + 1;    //entryID has to be incremented since the recyclerview index starts at 0 while the database starts at 1
+            entryId = entryId + 1;
             loadDetailsFromDatabase();
             journeyNameTV.setText(name);
             journeyLocationTV.setText(location);
@@ -108,12 +108,20 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    //extract the info from the journal entry from the database before displaying it
+    public void takePhotos(View view){
+        Intent i = new Intent(this, CameraActivity.class);
+        startActivity(i);
+        Log.d("CameraActivity", "Failed to Start");
+    }
+    public void viewPhotos(View view){
+        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+        Log.d("CameraActivity", "Test");
+    }
     private void loadDetailsFromDatabase() {
         MyHelper helper = new MyHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        // Define the query and columns
+        // Define your query and columns
         String selection = "_id=?";
         String[] selectionArgs = {String.valueOf(entryId)};
 

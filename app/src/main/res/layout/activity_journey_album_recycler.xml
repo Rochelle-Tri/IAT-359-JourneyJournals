@@ -38,14 +38,15 @@
         android:paddingBottom="20dp"
         />
 
-    <TextView
-        android:id="@+id/emptyListTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:text="Your album is currently empty"
-        android:textSize="16sp"
-        tools:visibility="gone" />
+<!--    <TextView-->
+<!--        android:id="@+id/emptyListTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingBottom="20dp"-->
+<!--        android:text="Your album is curre-->
+<!--        ntly empty"-->
+<!--        android:textSize="16sp"-->
+<!--        tools:visibility="gone" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItems"

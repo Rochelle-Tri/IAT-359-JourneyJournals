@@ -30,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Journey Album"
-            android:onClick="goAlbum"
-            android:textColor="#1D422F"
             android:background="#84e89f"
+            android:onClick="goAlbum"
+            android:text="Journey Album"
+            android:textColor="#1D422F"
             android:textSize="20sp" />
 
 
@@ -170,17 +170,6 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="right"/>
 
-            <Button
-                android:id="@+id/addPhotosButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginBottom="10dp"
-                android:background="#84e89f"
-                android:onClick="addPhotos"
-                android:text="Add Photos"
-                android:textColor="#1D422F" />
-
             <EditText
                 android:id="@+id/notesBoxTextView"
                 android:layout_width="match_parent"
@@ -197,20 +186,52 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="12dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/checklistButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="#84e89f"
-            android:padding="10dp"
             android:text="View Checklist"
-            android:textColor="#1D422F"
-            android:textSize="20sp" />
+            android:layout_marginRight="5dp"
+            android:textSize="10sp"
+            android:textColor="#1D422F" />
+
+        <Button
+            android:id="@+id/takePhotosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:background="#84e89f"
+            android:onClick="takePhotos"
+            android:text="Take Photos"
+            android:textSize="10sp"
+            android:textColor="#1D422F" />
+
+        <Button
+            android:id="@+id/viewPhotosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#84e89f"
+            android:onClick="viewPhotos"
+            android:text="View Photos"
+            android:textSize="10sp"
+            android:textColor="#1D422F" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/saveButton"
@@ -225,5 +246,6 @@
 
 
     </LinearLayout>
+
 
 </LinearLayout>
