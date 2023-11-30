@@ -75,6 +75,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         String duration = journeyDurationTV.getText().toString();
         String notes = journeyNotesTV.getText().toString();
 
+        //get the checklist data from the previous page
         Bundle extra_data = getIntent().getExtras();
         String checklist = extra_data.getString("CHECKLIST_KEY");
 
@@ -83,7 +84,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
             long id = db.insertData(name, location, date, duration, notes, checklist);
             if (id < 0)
             {

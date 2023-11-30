@@ -5,8 +5,8 @@
     <uses-feature
         android:name="android.hardware.sensor.light"
         android:required="true" />
-
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JourneyJournals"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ChecklistActivity"
+            android:exported="false" />
         <activity
             android:name=".EditJournalDetailActivity"
             android:exported="false" />

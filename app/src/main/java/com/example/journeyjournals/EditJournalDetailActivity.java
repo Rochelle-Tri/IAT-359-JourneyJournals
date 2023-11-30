@@ -21,7 +21,9 @@ import android.widget.Toast;
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
 
-    String name, location, date, duration, notes;
+    String name, location, date, duration, notes, checklist;
+
+    String checklistData;
     private MyDataBase db;
     private int entryId;
 
@@ -58,6 +60,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             journeyDurationTV.setText(duration);
             journeyNotesTV.setText(notes);
 
+            checklistData = checklist;
+
         } else {
             // did not receive bundle with extra data
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
@@ -93,7 +97,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String newDuration = journeyDurationTV.getText().toString();
         String newNotes = journeyNotesTV.getText().toString();
         Toast.makeText(this, "your journal has been updated", Toast.LENGTH_SHORT).show();
-        //entryId = entryId -1;
         db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
     }
 
@@ -116,6 +119,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 date = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DATE));
                 duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
                 notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
+                checklist = cursor.getString(cursor.getColumnIndexOrThrow(Constants.CHECKLIST));
 
                 // Close the cursor
                 cursor.close();
@@ -128,8 +132,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         }
     }
     public void viewChecklist(View view){
-        Intent i = new Intent(this, EditChecklistActivity.class);
-        i.putExtra ("ENTRYID_KEY", entryId);
+        Intent i = new Intent(this, ChecklistActivity.class);
+        i.putExtra ("CHECKLIST_KEY", checklistData);
         startActivity(i);
     }
 
