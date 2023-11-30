@@ -179,16 +179,6 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/checklistButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#84e89f"
-            android:text="View Checklist"
-            android:layout_marginRight="5dp"
-            android:textSize="10sp"
-            android:textColor="#1D422F" />
 
         <Button
             android:id="@+id/takePhotosButton"
