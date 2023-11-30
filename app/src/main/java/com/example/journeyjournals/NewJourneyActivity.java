@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class NewJourneyActivity extends AppCompatActivity {
 
     EditText journeyChecklist;
-    MyDataBase db;
+    //MyDataBase db;
 
     //light sensor stuff-------------------------------------------
     private LightSensorFunction lightSensorFunction;
@@ -34,7 +34,7 @@ public class NewJourneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_journey);
         journeyChecklist = (EditText)findViewById(R.id.checklistBoxTextView);
 
-        db = new MyDataBase(this);
+        //db = new MyDataBase(this);
 
         //light sensor----------------------------------------------------------------------------------------------
         lightSensorFunction = new LightSensorFunction();
@@ -63,20 +63,13 @@ public class NewJourneyActivity extends AppCompatActivity {
     public void viewJourneyDetails (View view) {
 
         String checkList = journeyChecklist.getText().toString();
-        long id = db.insertInitialData(checkList);
-        if (id < 0)
-        {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-        }
+
+        //go to details view of this journey after saving the checklist string into an intent bundle
+        Intent intent = new Intent(this, NewJournalDetailActivity.class);
+        intent.putExtra ("CHECKLIST_KEY", checkList);
+        startActivity(intent);
         journeyChecklist.setText("");
 
-        //go to details view of this journey
-        Intent intent = new Intent(this, NewJournalDetailActivity.class);
-        startActivity(intent);
     }
 
     public void goHome(View view){

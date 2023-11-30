@@ -87,7 +87,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     }
 
     public void saveData (View view) {
-//        Log.d("myTag", "smt went wrong");
         String newName = journeyNameTV.getText().toString();
         String newLocation = journeyLocationTV.getText().toString();
         String newDate = journeyDateTV.getText().toString();
@@ -98,30 +97,11 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
     }
 
-
-    public void goHome(View view){
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-    public void goAlbum(View view){
-        Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
-        startActivity(i);
-    }
-
-    public void takePhotos(View view){
-        Intent i = new Intent(this, CameraActivity.class);
-        startActivity(i);
-        Log.d("CameraActivity", "Failed to Start");
-    }
-    public void viewPhotos(View view){
-        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
-        Log.d("CameraActivity", "Test");
-    }
     private void loadDetailsFromDatabase() {
         MyHelper helper = new MyHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        // Define your query and columns
+        // Define the query and columns
         String selection = "_id=?";
         String[] selectionArgs = {String.valueOf(entryId)};
 
@@ -147,6 +127,31 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             db.close();
         }
     }
+    public void viewChecklist(View view){
+        Intent i = new Intent(this, EditChecklistActivity.class);
+        i.putExtra ("ENTRYID_KEY", entryId);
+        startActivity(i);
+    }
+
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    public void goAlbum(View view){
+        Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
+        startActivity(i);
+    }
+
+    public void takePhotos(View view){
+        Intent i = new Intent(this, CameraActivity.class);
+        startActivity(i);
+        Log.d("CameraActivity", "Failed to Start");
+    }
+    public void viewPhotos(View view){
+        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+        Log.d("CameraActivity", "Test");
+    }
+
 
     //light sensor code ---------------------------------------------------------------------------------------------
 

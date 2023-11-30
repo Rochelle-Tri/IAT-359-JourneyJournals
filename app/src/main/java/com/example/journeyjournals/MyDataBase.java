@@ -23,7 +23,7 @@ public class MyDataBase {
         long id = db.insert(Constants.TABLE_NAME, null, contentValues);
         return id;
     }
-    public long insertData (String name, String location, String date, String duration, String notes) {
+    public long insertData (String name, String location, String date, String duration, String notes, String checklist) {
         db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Constants.NAME, name);
@@ -31,6 +31,7 @@ public class MyDataBase {
         contentValues.put(Constants.DATE, date);
         contentValues.put(Constants.DURATION, duration);
         contentValues.put(Constants.NOTES, notes);
+        contentValues.put(Constants.CHECKLIST, checklist);
         long id = db.insert(Constants.TABLE_NAME, null, contentValues);
         return id;
     }
