@@ -46,7 +46,7 @@ public class MyDataBase {
         return cursor;
     }
 
-    //this is used in the EditJournal page where the user wants to change info in their journal entry
+    //used in the EditJournal page where the user wants to change info in their journal entry
     public void updateJournalEntry(int entryId, String newName, String newLocation, String newDate, String newDuration, String newNotes) {
         db = helper.getWritableDatabase();
 
@@ -61,6 +61,15 @@ public class MyDataBase {
         String[] whereArgs = {String.valueOf(entryId)};
 
         db.update(Constants.TABLE_NAME, values, whereClause, whereArgs);
+        db.close();
+    }
+
+    // Method to delete a row from the database based on the _id
+    public void deleteRow(long entryId) {
+        db = helper.getWritableDatabase();
+        String whereClause = "_id=?";
+        String[] whereArgs = {String.valueOf(entryId)};
+        db.delete(Constants.TABLE_NAME, whereClause, whereArgs);
         db.close();
     }
 

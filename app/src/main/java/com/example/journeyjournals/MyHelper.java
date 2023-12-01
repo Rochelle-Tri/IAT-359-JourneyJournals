@@ -48,17 +48,4 @@ public class MyHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean isTableEmpty() {
-        SQLiteDatabase db = getReadableDatabase();
-
-        String query = "SELECT 1 FROM " + Constants.TABLE_NAME + " LIMIT 1";
-        Cursor cursor = db.rawQuery(query, null);
-
-        boolean isEmpty = (cursor.getCount() == 0);
-
-        cursor.close();
-        db.close();
-
-        return isEmpty;
-    }
 }

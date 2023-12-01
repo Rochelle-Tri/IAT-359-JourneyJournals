@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 public class ChecklistActivity extends AppCompatActivity {
 
-    private MyDataBase db;
 
     String checklist;
 
@@ -21,14 +20,11 @@ public class ChecklistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checklist);
         checkListTV = (TextView)findViewById(R.id.checklistBoxTextView);
 
-        db = new MyDataBase(this);
-
         // Retrieve the entry ID from Intent extras
         Bundle extra_data = getIntent().getExtras();
         if (extra_data!= null) {
-            // retrieve value from bundle (supply the key, get the value)
+            // retrieve value from bundle (supply the key, get the value) and show it
             checklist = extra_data.getString("CHECKLIST_KEY");
-            //Toast.makeText(this, checklist, Toast.LENGTH_SHORT).show();
             checkListTV.setText(checklist);
 
         } else {

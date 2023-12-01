@@ -131,6 +131,13 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             db.close();
         }
     }
+
+    public void deleteEntry(View view){
+        db.deleteRow(entryId);
+        Toast.makeText(this, "your journal entry has been deleted", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     public void viewChecklist(View view){
         Intent i = new Intent(this, ChecklistActivity.class);
         i.putExtra ("CHECKLIST_KEY", checklistData);
