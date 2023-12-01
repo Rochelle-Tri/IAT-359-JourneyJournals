@@ -11,18 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="right">
 
-        <Button
+        <ImageButton
             android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:text="Home"
             android:onClick="goHome"
-            android:textColor="#1D422F"
-            android:background="#84e89f"
-            android:textSize="20sp" />
+            android:src="@drawable/home"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            />
 
 
     </LinearLayout>
@@ -218,7 +219,7 @@
             android:layout_height="wrap_content"
             android:background="#84e89f"
             android:padding="10dp"
-            android:text="Save"
+            android:text="Save Data"
             android:textColor="#1D422F"
             android:textSize="20sp" />
 

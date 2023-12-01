@@ -14,18 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
+        android:gravity="right"
         android:orientation="vertical">
 
-        <Button
+        <ImageButton
             android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:text="Home"
             android:onClick="goHome"
-            android:textColor="#1D422F"
-            android:background="#84e89f"
-            android:textSize="20sp" />
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/home"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            />
+
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
