@@ -5,6 +5,7 @@
     android:layout_marginTop="20dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,27 +15,27 @@
         android:gravity="right"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/AlbumButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
             android:onClick="goAlbum"
-            android:text="Journey Album"
-            android:textSize="12sp"
+            android:src="@drawable/journeyalbumlogo"
+            android:background="@null"
+            android:scaleType="fitCenter"
             android:textColor="#1D422F"
             android:layout_marginRight="20dp"
             />
 
         <ImageButton
             android:id="@+id/homeButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="10dp"
             android:text="Home"
             android:onClick="goHome"
-            android:src="@drawable/home"
+            android:src="@drawable/homelogo"
             android:background="@null"
             android:scaleType="fitCenter"
             />
@@ -73,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Name:"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:hint="   Stanley Park Jog"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -99,7 +100,7 @@
                 android:text="Location:"
                 android:id="@+id/journeyLocationTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -107,7 +108,7 @@
                 android:hint="   Stanley Park"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -125,7 +126,7 @@
                 android:text="Date:"
                 android:id="@+id/journeyDateTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -133,7 +134,7 @@
                 android:hint="   MM/DD/YYYY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -151,7 +152,7 @@
                 android:text="Duration:"
                 android:id="@+id/journeyTimeTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -159,7 +160,7 @@
                 android:hint="   HH:MM:SS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -182,7 +183,7 @@
                 android:text="Notes:"
                 android:id="@+id/journeyNotesTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginBottom="10dp"
                 android:gravity="right"/>
 
@@ -257,28 +258,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#84e89f"
-            android:paddingRight="50dp"
-            android:paddingLeft="50dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Save Data"
             android:gravity="center_horizontal"
             android:textColor="#1D422F"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/deleteButton"
+            android:onClick="deleteEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#84e89f"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="Delete Entry"
+            android:gravity="center_horizontal"
+            android:textColor="#1D422F"
             android:layout_marginBottom="10dp"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/deleteButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="deleteEntry"
-            android:text="Delete Journey"
-            android:src="@drawable/trashcan"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            />
+<!--        <ImageButton-->
+<!--            android:id="@+id/deleteButton"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:onClick="deleteEntry"-->
+<!--            android:text="Delete Journey"-->
+<!--            android:src="@drawable/deletelogo"-->
+<!--            android:background="@null"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            />-->
 
 
 

@@ -16,11 +16,11 @@
 
         <ImageButton
             android:id="@+id/homeButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
             android:text="Home"
             android:onClick="goHome"
-            android:src="@drawable/home"
+            android:src="@drawable/homelogo"
             android:background="@null"
             android:scaleType="fitCenter"
             />
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Name:"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:hint="   Stanley Park Jog"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -72,7 +72,7 @@
                 android:text="Location:"
                 android:id="@+id/journeyLocationTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -80,7 +80,7 @@
                 android:hint="   Stanley Park"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -98,7 +98,7 @@
                 android:text="Date:"
                 android:id="@+id/journeyDateTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -106,7 +106,7 @@
                 android:hint="   MM/DD/YYYY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -124,7 +124,7 @@
                 android:text="Duration:"
                 android:id="@+id/journeyTimeTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="right" />
 
             <EditText
@@ -132,7 +132,7 @@
                 android:hint="   HH:MM:SS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -155,7 +155,7 @@
                 android:text="Notes:"
                 android:id="@+id/journeyNotesTextView"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginBottom="10dp"
                 android:gravity="right"/>
 
