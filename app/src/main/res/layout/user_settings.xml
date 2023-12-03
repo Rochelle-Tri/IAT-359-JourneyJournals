@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:text="Settings"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:textStyle="bold"/>
 
         <LinearLayout
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="#84C596"
                     android:text="Turn On Sensor"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
                 <RadioButton
                     android:id="@+id/radioOff"
                     android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                     android:text="Turn Off Sensor"
                     android:buttonTint="#84C596"
                     android:checked="true"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </RadioGroup>
 
@@ -109,6 +109,7 @@
             android:textColor="#1D422F"
             android:background="@drawable/button_style"
             android:onClick="saveData"
+            android:textSize="18sp"
             android:text="Save Data" />
 
 
@@ -128,6 +129,7 @@
             android:textColor="#1D422F"
             android:background="@drawable/button2_style"
             android:onClick="goBack"
+            android:textSize="18sp"
             android:text="Cancel" />
 
 
