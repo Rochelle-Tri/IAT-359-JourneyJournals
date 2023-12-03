@@ -190,7 +190,7 @@
             <EditText
                 android:id="@+id/notesBoxTextView"
                 android:layout_width="match_parent"
-                android:layout_height="136dp"
+                android:layout_height="160dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/textbox_style"
                 android:gravity="top"
@@ -208,39 +208,39 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checklistButton"
             android:onClick="viewChecklist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
+            android:background="@drawable/button_small_style"
             android:text="View Checklist"
             android:layout_marginRight="10dp"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#1D422F" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/takePhotosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:background="#84e89f"
+            android:background="@drawable/button_small_style"
             android:onClick="takePhotos"
             android:text="Take Photos"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#1D422F" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/viewPhotosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
+            android:background="@drawable/button_small_style"
             android:onClick="viewPhotos"
             android:text="View Photos"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#1D422F" />
 
     </LinearLayout>
@@ -252,12 +252,12 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
             android:onClick="saveData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#84e89f"
+            android:background="@drawable/button_style"
             android:paddingRight="30dp"
             android:paddingLeft="30dp"
             android:paddingTop="15dp"
@@ -267,13 +267,14 @@
             android:textColor="#1D422F"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:textSize="20sp" />
-        <Button
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteButton"
             android:onClick="deleteEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#84e89f"
+            android:background="@drawable/button2_style"
             android:paddingRight="30dp"
             android:paddingLeft="30dp"
             android:paddingTop="15dp"
@@ -282,7 +283,7 @@
             android:gravity="center_horizontal"
             android:textColor="#1D422F"
             android:layout_marginBottom="10dp"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
 <!--        <ImageButton-->
 <!--            android:id="@+id/deleteButton"-->

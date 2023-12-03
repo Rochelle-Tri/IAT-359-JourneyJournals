@@ -48,8 +48,7 @@ public class MyHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Method to check if the entire database is empty
-    // Method to check if all columns in a specific table are empty
+    // Method to check if any is any data inserted in the database
     public boolean areAllColumnsEmpty(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();
 

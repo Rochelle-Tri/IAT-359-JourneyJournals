@@ -106,29 +106,30 @@
         android:padding="10dp"
         android:gravity="top"
         android:textSize="18sp" />
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/startJourney"
         android:onClick="viewJourneyDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start Journey!"
         android:textColor="#1D422F"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:padding="10dp"
-        android:background="#84e89f"
+        android:background="@drawable/button_style"
         android:layout_marginBottom="20dp"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel"
         android:onClick="cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:textColor="#1D422F"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:padding="10dp"
-        android:background="#84e89f"
+        android:background="@drawable/button2_style"
         />
 
 

@@ -16,7 +16,7 @@
         android:layout_weight="0.1"
         android:orientation="vertical">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +24,8 @@
             android:text="Back"
             android:onClick="goBack"
             android:textColor="#1D422F"
-            android:background="#84e89f"
-            android:textSize="20sp" />
+            android:background="@drawable/button_style"
+            android:textSize="14dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

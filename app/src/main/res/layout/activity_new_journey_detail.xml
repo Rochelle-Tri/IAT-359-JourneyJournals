@@ -181,27 +181,27 @@
         android:orientation="horizontal">
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/takePhotosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="5dp"
-            android:background="#84e89f"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_small_style"
             android:onClick="takePhotos"
             android:text="Take Photos"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:textColor="#1D422F" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/viewPhotosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
+            android:background="@drawable/button_small_style"
             android:onClick="viewPhotos"
             android:text="View Photos"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:textColor="#1D422F" />
 
     </LinearLayout>
@@ -212,14 +212,14 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
             android:onClick="saveData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#84e89f"
+            android:background="@drawable/button_style"
             android:padding="10dp"
-            android:text="Save Data"
+            android:text="Save Entry"
             android:textColor="#1D422F"
             android:textSize="20sp" />
 
