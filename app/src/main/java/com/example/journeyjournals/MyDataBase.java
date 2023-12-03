@@ -64,15 +64,4 @@ public class MyDataBase {
         db.close();
     }
 
-    // Method to check if the database is empty (no inserted data)
-    public boolean isDatabaseEmpty() {
-        db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table'", null);
-        cursor.moveToFirst();
-        int tableCount = cursor.getInt(0);
-        cursor.close();
-        db.close();
-        return tableCount == 0;
-    }
-
 }
