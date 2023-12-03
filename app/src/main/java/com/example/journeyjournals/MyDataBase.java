@@ -14,15 +14,6 @@ public class MyDataBase {
         context = c;
         helper = new MyHelper(context);
     }
-    public long insertInitialData (String checklist) {
-        db = helper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-//        contentValues.put(Constants.NAME, name);
-//        contentValues.put(Constants.LOCATION, location);
-        contentValues.put(Constants.CHECKLIST, checklist);
-        long id = db.insert(Constants.TABLE_NAME, null, contentValues);
-        return id;
-    }
     public long insertData (String name, String location, String date, String duration, String notes, String checklist) {
         db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -71,6 +62,17 @@ public class MyDataBase {
         String[] whereArgs = {String.valueOf(entryId)};
         db.delete(Constants.TABLE_NAME, whereClause, whereArgs);
         db.close();
+    }
+
+    // Method to check if the database is empty (no inserted data)
+    public boolean isDatabaseEmpty() {
+        db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table'", null);
+        cursor.moveToFirst();
+        int tableCount = cursor.getInt(0);
+        cursor.close();
+        db.close();
+        return tableCount == 0;
     }
 
 }

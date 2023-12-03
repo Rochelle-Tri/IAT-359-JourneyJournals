@@ -48,4 +48,23 @@ public class MyHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to check if the entire database is empty
+    // Method to check if all columns in a specific table are empty
+    public boolean areAllColumnsEmpty(String tableName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+
+        // Check if there are any rows in the table
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return false; // There are rows in the table
+        }
+
+        cursor.close();
+        db.close();
+        return true; // The table is empty
+    }
+
 }
