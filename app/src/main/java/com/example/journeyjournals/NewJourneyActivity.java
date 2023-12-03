@@ -72,6 +72,10 @@ public class NewJourneyActivity extends AppCompatActivity {
 
     }
 
+    public void cancelButton(View view){
+        finish();
+    }
+
     public void goHome(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
