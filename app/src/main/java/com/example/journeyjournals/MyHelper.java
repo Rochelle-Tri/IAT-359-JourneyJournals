@@ -48,22 +48,17 @@ public class MyHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Method to check if any is any data inserted in the database
-    public boolean areAllColumnsEmpty(String tableName) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    public boolean isTableEmpty() {
+        SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+        String query = "SELECT 1 FROM " + Constants.TABLE_NAME + " LIMIT 1";
+        Cursor cursor = db.rawQuery(query, null);
 
-        // Check if there are any rows in the table
-        if (cursor.moveToFirst()) {
-            cursor.close();
-            db.close();
-            return false; // There are rows in the table
-        }
+        boolean isEmpty = (cursor.getCount() == 0);
 
         cursor.close();
         db.close();
-        return true; // The table is empty
-    }
 
+        return isEmpty;
+    }
 }
