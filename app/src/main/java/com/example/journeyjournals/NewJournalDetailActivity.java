@@ -13,7 +13,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+
 import android.provider.MediaStore;
+
+import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -132,25 +136,36 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         String date = journeyDateTV.getText().toString();
         String duration = journeyDurationTV.getText().toString();
         String notes = journeyNotesTV.getText().toString();
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-        long id = db.insertData(name, location, date, duration, notes);
-        if (id < 0)
-        {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+
+        //get the checklist data from the previous page
+        Bundle extra_data = getIntent().getExtras();
+        String checklist = extra_data.getString("CHECKLIST_KEY");
+
+        //make sure all fields are filled out before they can save the entry
+        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)){
+            Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
         }
-        else
-        {
-            Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
+        else{
+            long id = db.insertData(name, location, date, duration, notes, checklist);
+            if (id < 0)
+            {
+                Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
+            }
+            finish();
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
         }
-        finish();
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
     }
 
     public void goHome(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
 
 //    public void takePhotos(View view){
 //        Intent i = new Intent(this, CameraActivity.class);
@@ -292,6 +307,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 //
 //        return photos;
 //    }
+
 
     //light sensor code ---------------------------------------------------------------------------------------------
 
