@@ -1,34 +1,29 @@
 package com.example.journeyjournals;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
 
-    String name, location, date, duration, notes;
+    String name, location, date, duration, notes, checklist;
+
+    String checklistData;
     private MyDataBase db;
     private int entryId;
 
@@ -38,11 +33,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     private static final String MY_PREFS = "MyPrefs";
     private boolean lightSensorEnabled = true;
     final int REQUEST_CODE = 0;
-
-    //camera stuff ---------------------------------------------
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int REQUEST_CAMERA_PERMISSION = 2;
-    private Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +60,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             journeyDurationTV.setText(duration);
             journeyNotesTV.setText(notes);
 
+            checklistData = checklist;
+
         } else {
             // did not receive bundle with extra data
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
@@ -96,83 +88,23 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
             Log.d("NewJourneyActivity", "Light sensor registered");
         }
-
-        //camera stuff-----------------------------------------------------------------------------
-        // Retrieve the imageBitmap from Intent
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("imageBitmap")) {
-            imageBitmap = intent.getParcelableExtra("imageBitmap");
-            // Use the imageBitmap as needed (e.g., display it in an ImageView)
-        }
-
     }
 
     public void saveData (View view) {
-//        Log.d("myTag", "smt went wrong");
         String newName = journeyNameTV.getText().toString();
         String newLocation = journeyLocationTV.getText().toString();
         String newDate = journeyDateTV.getText().toString();
         String newDuration = journeyDurationTV.getText().toString();
         String newNotes = journeyNotesTV.getText().toString();
         Toast.makeText(this, "your journal has been updated", Toast.LENGTH_SHORT).show();
-        //entryId = entryId -1;
         db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
-    }
-
-
-    public void goHome(View view){
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-    public void goAlbum(View view){
-        Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
-        startActivity(i);
-    }
-
-//    public void takePhotos(View view){
-//        Intent i = new Intent(this, CameraActivity.class);
-//        startActivity(i);
-//        Log.d("CameraActivity", "Failed to Start");
-//    }
-//    public void viewPhotos(View view){
-//        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
-//        Log.d("CameraActivity", "Test");
-//    }
-
-    public void openCamera(View view) {
-        // Check if camera permission is granted
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            // Permission is granted, open the camera
-//            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-//                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-//            }
-//        } else {
-//            // Permission is not granted, request it
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA},
-//                    REQUEST_CAMERA_PERMISSION);
-//        }
-    }
-
-    public void displayPhoto(View view) {
-//        if (imageBitmap != null) {
-//            // Create an ImageView in your layout (e.g., with id "imageView")
-//            ImageView imageView = findViewById(R.id.imageView); // Replace with your actual id
-//            // Set the imageBitmap to the ImageView
-//            imageView.setImageBitmap(imageBitmap);
-//        } else {
-//            // Handle the case where the imageBitmap is null (not captured)
-//            Toast.makeText(this, "No image captured yet", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     private void loadDetailsFromDatabase() {
         MyHelper helper = new MyHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        // Define your query and columns
+        // Define the query and columns
         String selection = "_id=?";
         String[] selectionArgs = {String.valueOf(entryId)};
 
@@ -187,6 +119,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 date = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DATE));
                 duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
                 notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
+                checklist = cursor.getString(cursor.getColumnIndexOrThrow(Constants.CHECKLIST));
 
                 // Close the cursor
                 cursor.close();
@@ -198,6 +131,38 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             db.close();
         }
     }
+
+    public void deleteEntry(View view){
+        db.deleteRow(entryId);
+        Toast.makeText(this, "your journal entry has been deleted", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    public void viewChecklist(View view){
+        Intent i = new Intent(this, ChecklistActivity.class);
+        i.putExtra ("CHECKLIST_KEY", checklistData);
+        startActivity(i);
+    }
+
+    public void goHome(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    public void goAlbum(View view){
+        Intent i = new Intent(this, JourneyAlbumRecyclerActivity.class);
+        startActivity(i);
+    }
+
+    public void takePhotos(View view){
+        Intent i = new Intent(this, CameraActivity.class);
+        startActivity(i);
+        Log.d("CameraActivity", "Failed to Start");
+    }
+    public void viewPhotos(View view){
+        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+        Log.d("CameraActivity", "Test");
+    }
+
 
     //light sensor code ---------------------------------------------------------------------------------------------
 
