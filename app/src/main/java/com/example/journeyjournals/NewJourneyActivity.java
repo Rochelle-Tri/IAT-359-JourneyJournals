@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 public class NewJourneyActivity extends AppCompatActivity {
 
-    EditText journeyName, journeyLocation, journeyChecklist;
-    MyDataBase db;
+    EditText journeyChecklist;
+    //MyDataBase db;
 
     //light sensor stuff-------------------------------------------
     private LightSensorFunction lightSensorFunction;
@@ -32,11 +32,9 @@ public class NewJourneyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_journey);
-//        journeyName = (EditText)findViewById(R.id.userJourneyNameTextView);
-//        journeyLocation = (EditText)findViewById(R.id.userJourneyLocationTextView);
         journeyChecklist = (EditText)findViewById(R.id.checklistBoxTextView);
 
-        db = new MyDataBase(this);
+        //db = new MyDataBase(this);
 
         //light sensor----------------------------------------------------------------------------------------------
         lightSensorFunction = new LightSensorFunction();
@@ -61,25 +59,23 @@ public class NewJourneyActivity extends AppCompatActivity {
         }
     }
 
+    //the user "starts their journey" after they finish writing their checklist
     public void viewJourneyDetails (View view) {
 
         Log.d("NewJourneyActivity", "viewJourneyDetails called");
 
         String checkList = journeyChecklist.getText().toString();
-        long id = db.insertInitialData(checkList);
-        if (id < 0)
-        {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-        }
+
+        //go to details view of this journey after saving the checklist string into an intent bundle
+        Intent intent = new Intent(this, NewJournalDetailActivity.class);
+        intent.putExtra ("CHECKLIST_KEY", checkList);
+        startActivity(intent);
         journeyChecklist.setText("");
 
-        //go to details view of this journey
-        Intent intent = new Intent(this, NewJournalDetailActivity.class);
-        startActivity(intent);
+    }
+
+    public void cancelButton(View view){
+        finish();
     }
 
     public void goHome(View view){
