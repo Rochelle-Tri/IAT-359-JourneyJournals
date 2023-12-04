@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,13 +50,12 @@ public class JourneyAlbumRecyclerActivity extends AppCompatActivity implements A
         helper = new MyHelper(this);
         Cursor cursor = db.getData();
 
-        emptyAlbum = (TextView)findViewById(R.id.emptyListTextView);
-        if(helper.areAllColumnsEmpty(Constants.TABLE_NAME)){
-            emptyAlbum.setVisibility(View.VISIBLE);
-        }
-        else{
-            emptyAlbum.setVisibility(View.GONE);
-        }
+//        if(helper.isTableEmpty()){
+//            emptyAlbum.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            emptyAlbum.setVisibility(View.GONE);
+//        }
 
        //get the info from each column
         int index1 = cursor.getColumnIndex(Constants.NAME);
