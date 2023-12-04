@@ -8,7 +8,7 @@
     android:padding="20dp"
     android:layout_margin="20dp"
     android:gravity="center"
-    android:background="@drawable/button_small_style"
+    android:background="#B9F6C9"
     android:orientation="vertical">
 
         <TextView
