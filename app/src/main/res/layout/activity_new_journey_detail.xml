@@ -11,19 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:orientation="vertical"
-        android:gravity="right">
+        android:orientation="vertical">
 
-        <ImageButton
+        <Button
             android:id="@+id/homeButton"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="Home"
             android:onClick="goHome"
-            android:src="@drawable/homelogo"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            />
+            android:textColor="#1D422F"
+            android:background="#84e89f"
+            android:textSize="20sp" />
 
 
     </LinearLayout>
@@ -46,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Name:"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -55,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:hint="   Stanley Park Jog"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -72,7 +71,7 @@
                 android:text="Location:"
                 android:id="@+id/journeyLocationTextView"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:gravity="right" />
 
             <EditText
@@ -80,7 +79,7 @@
                 android:hint="   Stanley Park"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -98,7 +97,7 @@
                 android:text="Date:"
                 android:id="@+id/journeyDateTextView"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:gravity="right" />
 
             <EditText
@@ -106,7 +105,7 @@
                 android:hint="   MM/DD/YYYY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -124,7 +123,7 @@
                 android:text="Duration:"
                 android:id="@+id/journeyTimeTextView"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:gravity="right" />
 
             <EditText
@@ -132,7 +131,7 @@
                 android:hint="   HH:MM:SS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:paddingRight="10dp"/>
 
         </LinearLayout>
@@ -155,7 +154,7 @@
                 android:text="Notes:"
                 android:id="@+id/journeyNotesTextView"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:layout_marginBottom="10dp"
                 android:gravity="right"/>
 
@@ -180,28 +179,38 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/takePhotosButton"
+        <Button
+            android:id="@+id/checklistButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/button_small_style"
-            android:onClick="takePhotos"
-            android:text="Take Photos"
-            android:textSize="14sp"
+            android:background="#84e89f"
+            android:text="View Checklist"
+            android:layout_marginRight="5dp"
+            android:textSize="10sp"
             android:textColor="#1D422F" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/viewPhotosButton"
+        <Button
+            android:id="@+id/btnOpenCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/button_small_style"
-            android:onClick="viewPhotos"
+            android:layout_marginRight="5dp"
+            android:background="#84e89f"
+            android:onClick="openCamera"
+            android:text="Take Photos"
+            android:textSize="10sp"
+            android:textColor="#1D422F" />
+
+        <Button
+            android:id="@+id/btnDisplayPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#84e89f"
+            android:onClick="displayPhoto"
             android:text="View Photos"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textColor="#1D422F" />
 
     </LinearLayout>
@@ -212,18 +221,20 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/saveButton"
             android:onClick="saveData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_style"
+            android:background="#84e89f"
             android:padding="10dp"
-            android:text="Save Entry"
+            android:text="Save"
             android:textColor="#1D422F"
             android:textSize="20sp" />
 
     </LinearLayout>
+
+
 
 
 </LinearLayout>
