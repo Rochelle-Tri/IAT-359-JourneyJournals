@@ -7,13 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import android.text.TextUtils;
@@ -27,10 +30,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class NewJournalDetailActivity extends AppCompatActivity {
 
@@ -55,6 +65,8 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 2;
     private Bitmap imageBitmap;
+    private String currentPhotoPath;  // Add this variable
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -126,7 +138,10 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 //            ActivityCompat.requestPermissions(this,
 //                    new String[]{Manifest.permission.CAMERA},
 //                    REQUEST_CAMERA_PERMISSION);
+
 //        }
+
+
 
     }
     public void saveData (View view) {
@@ -204,11 +219,38 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
     public void openCamera(View view) {
         // Check if camera permission is granted
+//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+//                == PackageManager.PERMISSION_GRANTED) {
+//            // Permission is granted, open the camera
+//            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+//                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+//            }
+//        } else {
+//            // Permission is not granted, request it
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.CAMERA},
+//                    REQUEST_CAMERA_PERMISSION);
+//        }
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
             // Permission is granted, open the camera
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+
+            // Add the following lines to create a file for the photo
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
             }
         } else {
@@ -217,6 +259,23 @@ public class NewJournalDetailActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.CAMERA},
                     REQUEST_CAMERA_PERMISSION);
         }
+
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
     // Handle the permission request result
@@ -251,17 +310,26 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
     public void displayPhoto(View view) {
 
-        if (imageBitmap != null) {
-            // Start the DisplayPhotosActivity
+//        if (imageBitmap != null) {
+//            // Pass the imageBitmap to ViewImagesActivity
+//            Intent intent = new Intent(this, ViewImagesActivity.class);
+//            intent.putExtra("imageBitmap", imageBitmap);
+//            startActivity(intent);
+//        } else {
+//            // Handle the case where the imageBitmap is null (not captured)
+//            Toast.makeText(this, "No image captured yet", Toast.LENGTH_SHORT).show();
+//        }
+
+        if (currentPhotoPath != null) {
+            // Pass the currentPhotoPath to ViewImagesActivity
             Intent intent = new Intent(this, ViewImagesActivity.class);
-            intent.putExtra("imageBitmap", imageBitmap);
+            intent.putExtra("photoPath", currentPhotoPath);
             startActivity(intent);
-
-
         } else {
-            // Handle the case where the imageBitmap is null (not captured)
-            Toast.makeText(this, "No image captured yet", Toast.LENGTH_SHORT).show();
+            // Handle the case where the currentPhotoPath is null (no photo captured)
+            Toast.makeText(this, "No photo captured yet", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     // Add viewImages -----------------------------------------------------------------------------------------------
@@ -373,11 +441,27 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-            imageBitmap = (Bitmap) data.getExtras().get("data");
-            // Pass the imageBitmap to EditJournalDetailActivity
-            Intent intent = new Intent(this, EditJournalDetailActivity.class);
-            intent.putExtra("imageBitmap", imageBitmap);
-//            startActivity(intent);
+//            imageBitmap = (Bitmap) data.getExtras().get("data");
+//            String imagePath = saveImageToFile(imageBitmap);
+
+            // Load the full-sized image using the currentPhotoPath
+            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+        }
+    }
+
+    private String saveImageToFile(Bitmap bitmap) {
+        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+            return file.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -7,6 +7,8 @@ import android.os.Parcelable;
 public class PhotoModel implements Parcelable {
     private Bitmap photo;
 
+
+
     public PhotoModel(Bitmap photo) {
         this.photo = photo;
     }

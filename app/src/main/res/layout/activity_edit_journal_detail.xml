@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="right"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -168,29 +168,30 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="36dp"
+        android:layout_weight="0.5">
+
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/notesLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
             android:layout_marginBottom="10dp"
-            android:id="@+id/notesLayout">
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/journeyNotesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notes:"
-                android:id="@+id/journeyNotesTextView"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:layout_marginBottom="10dp"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:text="Notes:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/notesBoxTextView"
                 android:layout_width="match_parent"
-                android:layout_height="111dp"
+                android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/textbox_style"
                 android:gravity="top"
@@ -203,8 +204,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:layout_weight="1"
+        android:layout_height="70dp"
+
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -247,56 +248,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_weight="1"
+        android:layout_height="90dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
-            android:onClick="saveData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_style"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:text="Save Data"
-            android:gravity="center_horizontal"
-            android:textColor="#1D422F"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:textSize="18sp" />
+            android:background="@drawable/button_style"
+            android:gravity="center_horizontal"
+            android:onClick="saveData"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:text="Save Data"
+            android:textColor="#1D422F"
+            android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteButton"
-            android:onClick="deleteEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button2_style"
-            android:paddingRight="30dp"
+            android:gravity="center_horizontal"
+            android:onClick="deleteEntry"
             android:paddingLeft="30dp"
             android:paddingTop="15dp"
+            android:paddingRight="30dp"
             android:paddingBottom="15dp"
             android:text="Delete Entry"
-            android:gravity="center_horizontal"
             android:textColor="#1D422F"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/deleteButton"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="70dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:onClick="deleteEntry"-->
-<!--            android:text="Delete Journey"-->
-<!--            android:src="@drawable/deletelogo"-->
-<!--            android:background="@null"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            />-->
-
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/deleteButton"-->
+        <!--            android:layout_width="60dp"-->
+        <!--            android:layout_height="70dp"-->
+        <!--            android:layout_marginBottom="10dp"-->
+        <!--            android:onClick="deleteEntry"-->
+        <!--            android:text="Delete Journey"-->
+        <!--            android:src="@drawable/deletelogo"-->
+        <!--            android:background="@null"-->
+        <!--            android:scaleType="fitCenter"-->
+        <!--            />-->
 
 
     </LinearLayout>
