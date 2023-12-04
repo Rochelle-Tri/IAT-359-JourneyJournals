@@ -1,10 +1,14 @@
 package com.example.journeyjournals;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -13,6 +17,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -153,15 +158,24 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void takePhotos(View view){
-        Intent i = new Intent(this, CameraActivity.class);
-        startActivity(i);
-        Log.d("CameraActivity", "Failed to Start");
+//    public void takePhotos(View view){
+//        Intent i = new Intent(this, CameraActivity.class);
+//        startActivity(i);
+//        Log.d("CameraActivity", "Failed to Start");
+//    }
+//    public void viewPhotos(View view){
+//        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
+//        Log.d("CameraActivity", "Test");
+//    }
+
+    public void openCamera(View view) {
     }
-    public void viewPhotos(View view){
-        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
-        Log.d("CameraActivity", "Test");
+
+    public void displayPhoto(View view) {
+
     }
+
+
 
 
     //light sensor code ---------------------------------------------------------------------------------------------

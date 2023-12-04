@@ -221,24 +221,24 @@
             android:textColor="#1D422F" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/takePhotosButton"
+            android:id="@+id/btnOpenCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/button_small_style"
-            android:onClick="takePhotos"
+            android:onClick="openCamera"
             android:text="Take Photos"
             android:textSize="12sp"
             android:textColor="#1D422F" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/viewPhotosButton"
+            android:id="@+id/btnDisplayPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_small_style"
-            android:onClick="viewPhotos"
+            android:onClick="displayPhoto"
             android:text="View Photos"
             android:textSize="12sp"
             android:textColor="#1D422F" />
