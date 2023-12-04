@@ -191,24 +191,24 @@
             android:textColor="#1D422F" />
 
         <Button
-            android:id="@+id/takePhotosButton"
+            android:id="@+id/btnOpenCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="5dp"
             android:background="#84e89f"
-            android:onClick="takePhotos"
+            android:onClick="openCamera"
             android:text="Take Photos"
             android:textSize="10sp"
             android:textColor="#1D422F" />
 
         <Button
-            android:id="@+id/viewPhotosButton"
+            android:id="@+id/btnDisplayPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="#84e89f"
-            android:onClick="viewPhotos"
+            android:onClick="displayPhoto"
             android:text="View Photos"
             android:textSize="10sp"
             android:textColor="#1D422F" />
@@ -233,6 +233,8 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
+
 
 
 </LinearLayout>

@@ -63,6 +63,8 @@ public class NewJourneyActivity extends AppCompatActivity {
 
     public void viewJourneyDetails (View view) {
 
+        Log.d("NewJourneyActivity", "viewJourneyDetails called");
+
         String checkList = journeyChecklist.getText().toString();
         long id = db.insertInitialData(checkList);
         if (id < 0)

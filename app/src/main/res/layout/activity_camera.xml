@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Back"
+            android:text="Done"
             android:onClick="goBack"
             android:background="#B9F6C9"
             android:textSize="20sp" />
