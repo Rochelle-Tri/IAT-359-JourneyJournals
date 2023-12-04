@@ -14,16 +14,7 @@ public class MyDataBase {
         context = c;
         helper = new MyHelper(context);
     }
-    public long insertInitialData (String checklist) {
-        db = helper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-//        contentValues.put(Constants.NAME, name);
-//        contentValues.put(Constants.LOCATION, location);
-        contentValues.put(Constants.CHECKLIST, checklist);
-        long id = db.insert(Constants.TABLE_NAME, null, contentValues);
-        return id;
-    }
-    public long insertData (String name, String location, String date, String duration, String notes) {
+    public long insertData (String name, String location, String date, String duration, String notes, String checklist) {
         db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Constants.NAME, name);
@@ -31,9 +22,12 @@ public class MyDataBase {
         contentValues.put(Constants.DATE, date);
         contentValues.put(Constants.DURATION, duration);
         contentValues.put(Constants.NOTES, notes);
+        contentValues.put(Constants.CHECKLIST, checklist);
         long id = db.insert(Constants.TABLE_NAME, null, contentValues);
         return id;
     }
+
+    //this is used in the recyclerview where it needs to extract data to display each entry in the album page
     public Cursor getData()
     {
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -43,6 +37,7 @@ public class MyDataBase {
         return cursor;
     }
 
+    //used in the EditJournal page where the user wants to change info in their journal entry
     public void updateJournalEntry(int entryId, String newName, String newLocation, String newDate, String newDuration, String newNotes) {
         db = helper.getWritableDatabase();
 
@@ -57,6 +52,15 @@ public class MyDataBase {
         String[] whereArgs = {String.valueOf(entryId)};
 
         db.update(Constants.TABLE_NAME, values, whereClause, whereArgs);
+        db.close();
+    }
+
+    // Method to delete a row from the database based on the _id
+    public void deleteRow(long entryId) {
+        db = helper.getWritableDatabase();
+        String whereClause = "_id=?";
+        String[] whereArgs = {String.valueOf(entryId)};
+        db.delete(Constants.TABLE_NAME, whereClause, whereArgs);
         db.close();
     }
 

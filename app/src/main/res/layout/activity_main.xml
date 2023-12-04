@@ -6,34 +6,52 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical"
+    android:background="@drawable/flowerpath"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
+
         android:orientation="vertical">
 
-        <Button
+        <ImageButton
             android:id="@+id/userSettings"
-            android:layout_width="121dp"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
             android:layout_gravity="right"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
             android:onClick="gotoUserSettings"
-            android:text="Settings" />
+            android:text="Settings"
+            android:src="@drawable/settingslogo"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello User!"
+            android:text="Welcome!"
             android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
             android:id="@+id/welcomeUser"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="50dp"/>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView1"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:layout_margin="40dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:src="@drawable/pathway"/>-->
     </LinearLayout>
 
 
@@ -43,23 +61,25 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/allTrips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
-            android:background="#84e89f"
+            android:background="@drawable/button_style"
             android:onClick="gotoAllTrips"
+            android:textSize="18sp"
             android:text="All Journeys" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/newTrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:onClick="gotoNewJourney"
-            android:background="#84e89f"
+            android:background="@drawable/button_small_style"
+            android:textSize="18sp"
             android:text="New Journey" />
 
     </LinearLayout>
