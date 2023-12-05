@@ -69,6 +69,12 @@ public class NewJourneyActivity extends AppCompatActivity {
         //go to details view of this journey after saving the checklist string into an intent bundle
         Intent intent = new Intent(this, NewJournalDetailActivity.class);
         intent.putExtra ("CHECKLIST_KEY", checkList);
+
+//        // Assuming you have a method to retrieve the entry ID based on user interaction
+//        long entryId = getEntryIdForSelectedJournalEntry();
+//        // Add the following line to set the entryId
+//        intent.putExtra("entryId", entryId);
+
         startActivity(intent);
         journeyChecklist.setText("");
 

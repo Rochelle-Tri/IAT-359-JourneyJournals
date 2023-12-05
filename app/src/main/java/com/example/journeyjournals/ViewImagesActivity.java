@@ -1,6 +1,9 @@
 package com.example.journeyjournals;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -101,6 +104,10 @@ public class ViewImagesActivity extends AppCompatActivity {
 
     private List<PhotoModel> photoList;
 
+    private long entryId;  // Declare entryId as a class-level variable
+    private MyHelper db;   // Declare db as a class-level variable
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,19 +115,60 @@ public class ViewImagesActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.displayImageView);
 
-        // Retrieve the photo path from the intent
-        photoPath = getIntent().getStringExtra("photoPath");
+        // Retrieve the entry ID from the intent
+//        long entryId = getIntent().getLongExtra("entryId", -1);
+//
+//        if (entryId != -1) {
+//            // Initialize your database helper and get a readable database
+//            MyDataBase db = new MyDataBase(this);
+//
+//            // Retrieve the specific entry based on the entry ID
+//            Cursor cursor = db.getEntryById(entryId);
+//
+//            // Check if the cursor has data
+//            if (cursor.moveToFirst()) {
+//                // Retrieve the photo path from the cursor
+//                @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
+//
+//                // Load and set the image in the ImageView
+//                if (photoPath != null) {
+//                    Bitmap imageBitmap = BitmapFactory.decodeFile(photoPath);
+//                    imageView.setImageBitmap(imageBitmap);
+//                } else {
+//                    // Handle the case where the photoPath is null
+//                    Log.e("ViewImagesActivity", "Photo path is null");
+//                    finish(); // Finish the activity if no photo path is available
+//                }
+//            }
+//
+//            // Close the cursor and the database
+//            cursor.close();
+//        } else {
+//            Log.e("ViewImagesActivity", "Invalid entry ID");
+//            finish(); // Finish the activity if entry ID is invalid
+//        }
 
-        // Load and set the image in the ImageView
-        if (photoPath != null) {
+        // Initialize the database helper
+        db = new MyHelper(this);
+
+        // Retrieve the entry ID from the intent
+        entryId = getIntent().getLongExtra("entryId", -1);
+
+        Log.d("ViewImagesActivity", "Received entryId: " + entryId);
+
+        // Retrieve the photo path from the database
+        String photoPath = db.getPhotoPath(entryId);
+
+        Log.d("ViewImagesActivity", "Retrieved photoPath: " + photoPath);
+
+        if (entryId != -1 && photoPath != null) {
+            // Load and set the image in the ImageView
             Bitmap imageBitmap = BitmapFactory.decodeFile(photoPath);
             imageView.setImageBitmap(imageBitmap);
         } else {
-            // Handle the case where the photoPath is null
-            Log.e("ViewImagesActivity", "Photo path is null");
-            finish(); // Finish the activity if no photo path is available
+            Log.e("ViewImagesActivity", "Invalid entry ID or photo path");
+            finish(); // Finish the activity if entry ID or photo path is invalid
         }
-
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {

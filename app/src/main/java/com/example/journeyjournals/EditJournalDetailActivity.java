@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class EditJournalDetailActivity extends AppCompatActivity {
@@ -39,6 +41,11 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     private boolean lightSensorEnabled = true;
     final int REQUEST_CODE = 0;
 
+    //camera stuff---------------
+
+    private String currentPhotoPath;  // Add this variable
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +108,10 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String newDate = journeyDateTV.getText().toString();
         String newDuration = journeyDurationTV.getText().toString();
         String newNotes = journeyNotesTV.getText().toString();
+        // Use the correct photo path
+        String newPhoto = currentPhotoPath;
         Toast.makeText(this, "your journal has been updated", Toast.LENGTH_SHORT).show();
-        db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
+        db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes, newPhoto);
     }
 
     private void loadDetailsFromDatabase() {
@@ -113,7 +122,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String selection = "_id=?";
         String[] selectionArgs = {String.valueOf(entryId)};
 
-        String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES};
+        String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES, Constants.PHOTO_PATH};
 
         try {
             Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
@@ -125,6 +134,10 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
                 notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
                 checklist = cursor.getString(cursor.getColumnIndexOrThrow(Constants.CHECKLIST));
+
+                // Retrieve the photo path from the cursor
+                currentPhotoPath = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
+
 
                 // Close the cursor
                 cursor.close();
@@ -167,6 +180,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 //        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
 //        Log.d("CameraActivity", "Test");
 //    }
+
+    //camera stuff------------
 
     public void openCamera(View view) {
     }
@@ -258,4 +273,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
         }
     };
+
+
 }

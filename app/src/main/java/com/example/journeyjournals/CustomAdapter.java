@@ -77,6 +77,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             int position = getAdapterPosition();
             Intent intent = new Intent (view.getContext(), EditJournalDetailActivity.class);
             intent.putExtra ("ITEM_KEY", position );
+
+//            intent.putExtra("entryId", entryId);
             view.getContext().startActivity(intent);
         }
     }
