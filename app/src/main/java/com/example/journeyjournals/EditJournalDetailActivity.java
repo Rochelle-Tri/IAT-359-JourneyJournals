@@ -28,7 +28,7 @@ import android.widget.Toast;
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
 
-    String name, location, date, duration, notes, checklist;
+    String name, location, date, duration, notes, checklist, photo;
 
     String checklistData;
     private MyDataBase db;
@@ -43,7 +43,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
     //camera stuff---------------
 
-    private String currentPhotoPath;  // Add this variable
+
+    String currentPhotoPath;  // Add this variable
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -73,6 +74,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             journeyNotesTV.setText(notes);
 
             checklistData = checklist;
+
+            currentPhotoPath = photo;
 
         } else {
             // did not receive bundle with extra data
@@ -136,7 +139,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 checklist = cursor.getString(cursor.getColumnIndexOrThrow(Constants.CHECKLIST));
 
                 // Retrieve the photo path from the cursor
-                currentPhotoPath = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
+                photo = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
 
 
                 // Close the cursor
@@ -171,15 +174,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-//    public void takePhotos(View view){
-//        Intent i = new Intent(this, CameraActivity.class);
-//        startActivity(i);
-//        Log.d("CameraActivity", "Failed to Start");
-//    }
-//    public void viewPhotos(View view){
-//        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
-//        Log.d("CameraActivity", "Test");
-//    }
 
     //camera stuff------------
 
@@ -187,7 +181,9 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     }
 
     public void displayPhoto(View view) {
-
+        Intent i = new Intent(this, ViewImagesActivity.class);
+        i.putExtra ("photoPath", photo);
+        startActivity(i);
     }
 
 

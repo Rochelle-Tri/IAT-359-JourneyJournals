@@ -115,100 +115,36 @@ public class ViewImagesActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.displayImageView);
 
-        // Retrieve the entry ID from the intent
-//        long entryId = getIntent().getLongExtra("entryId", -1);
-//
-//        if (entryId != -1) {
-//            // Initialize your database helper and get a readable database
-//            MyDataBase db = new MyDataBase(this);
-//
-//            // Retrieve the specific entry based on the entry ID
-//            Cursor cursor = db.getEntryById(entryId);
-//
-//            // Check if the cursor has data
-//            if (cursor.moveToFirst()) {
-//                // Retrieve the photo path from the cursor
-//                @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
-//
-//                // Load and set the image in the ImageView
-//                if (photoPath != null) {
-//                    Bitmap imageBitmap = BitmapFactory.decodeFile(photoPath);
-//                    imageView.setImageBitmap(imageBitmap);
-//                } else {
-//                    // Handle the case where the photoPath is null
-//                    Log.e("ViewImagesActivity", "Photo path is null");
-//                    finish(); // Finish the activity if no photo path is available
-//                }
-//            }
-//
-//            // Close the cursor and the database
-//            cursor.close();
-//        } else {
-//            Log.e("ViewImagesActivity", "Invalid entry ID");
-//            finish(); // Finish the activity if entry ID is invalid
-//        }
+        // Retrieve the photo path from the intent
+        photoPath = getIntent().getStringExtra("photoPath");
 
-        // Initialize the database helper
-        db = new MyHelper(this);
-
-        // Retrieve the entry ID from the intent
-        entryId = getIntent().getLongExtra("entryId", -1);
-
-        Log.d("ViewImagesActivity", "Received entryId: " + entryId);
-
-        // Retrieve the photo path from the database
-        String photoPath = db.getPhotoPath(entryId);
-
-        Log.d("ViewImagesActivity", "Retrieved photoPath: " + photoPath);
-
-        if (entryId != -1 && photoPath != null) {
-            // Load and set the image in the ImageView
+        // Load and set the image in the ImageView
+        if (photoPath != null) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(photoPath);
             imageView.setImageBitmap(imageBitmap);
         } else {
-            Log.e("ViewImagesActivity", "Invalid entry ID or photo path");
-            finish(); // Finish the activity if entry ID or photo path is invalid
+            // Handle the case where the photoPath is null
+            Log.e("ViewImagesActivity", "Photo path is null");
+            finish(); // Finish the activity if no photo path is available
         }
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save the photoList in the outState bundle
-//        ArrayList<Parcelable> parcelableList = new ArrayList<>();
-//        for (PhotoModel photoModel : photoList) {
-//            parcelableList.add((Parcelable) photoModel);
-//        }
-//        outState.putParcelableArrayList("photoList", parcelableList);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Restore the photoList from the savedInstanceState bundle
-//        if (savedInstanceState != null) {
-//            ArrayList<Parcelable> restoredParcelableList = savedInstanceState.getParcelableArrayList("photoList");
-//            if (restoredParcelableList != null) {
-//                List<PhotoModel> restoredPhotoList = new ArrayList<>();
-//                for (Parcelable parcelable : restoredParcelableList) {
-//                    if (parcelable instanceof PhotoModel) {
-//                        restoredPhotoList.add((PhotoModel) parcelable);
-//                    }
-//                }
-//                photoList.clear();
-//                photoList.addAll(restoredPhotoList);
-//                // Update the RecyclerView
-//                adapter.updateData(photoList);
-//            }
-//        }
+
+
     }
 
     // When a new photo is captured and you want to update the RecyclerView
     private void updateRecyclerView(Bitmap newImageBitmap) {
         // Add the new image to the photoList
-//        photoList.add(new PhotoModel(newImageBitmap));
 
-        // Notify the adapter about the data change
-//        adapter.updateData(photoList);
     }
 
     // Call this method whenever you want to update the RecyclerView with a new photo
@@ -218,8 +154,7 @@ public class ViewImagesActivity extends AppCompatActivity {
 //    }
 
     public void goBack(View view){
-//        Intent intent = new Intent(this, NewJournalDetailActivity.class);
-//        startActivity(intent);
+
         finish();
     }
 }

@@ -11,5 +11,5 @@ public class Constants {
     public static final String DURATION = "duration";
     public static final String NOTES = "notes";
     public static final String PHOTO_PATH = "photoPath";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 }
