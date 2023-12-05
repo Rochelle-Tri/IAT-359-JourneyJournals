@@ -302,7 +302,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
             // Retrieve user settings and update UI
             retrieveUserSetting();
-
+//hello
 //            // Get the captured image file
 //            File imageFile = new File(currentPhotoPath);
 //
