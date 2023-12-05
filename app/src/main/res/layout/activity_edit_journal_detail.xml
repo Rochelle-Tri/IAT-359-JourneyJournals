@@ -191,7 +191,7 @@
             <EditText
                 android:id="@+id/notesBoxTextView"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="125dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/textbox_style"
                 android:gravity="top"
@@ -221,17 +221,6 @@
             android:textSize="12sp"
             android:textColor="#1D422F" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnOpenCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button_small_style"
-            android:onClick="openCamera"
-            android:text="Take Photos"
-            android:textSize="12sp"
-            android:textColor="#1D422F" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnDisplayPhoto"
@@ -240,8 +229,8 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_small_style"
             android:onClick="displayPhoto"
-            android:text="View Photos"
-            android:textSize="12sp"
+            android:text="View Photo"
+            android:textSize="14sp"
             android:textColor="#1D422F" />
 
     </LinearLayout>

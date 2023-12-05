@@ -14,7 +14,7 @@ public class LightSensorFunction extends AppCompatActivity {
     public static void handleLightSensorChange(AppCompatActivity context, float lightIntensity, boolean lightSensorEnabled) {
         if (lightSensorEnabled) {
             // Automatically adjust background and font colors based on light intensity
-            if (lightIntensity < 10) {
+            if (lightIntensity < 5) {
                 updateBackgroundColor( context, Color.BLACK);
                 applyTextStyleToViews( context, R.style.DarkModeTextStyle);
                 Log.d("UserSettings", "Dark Mode: On");

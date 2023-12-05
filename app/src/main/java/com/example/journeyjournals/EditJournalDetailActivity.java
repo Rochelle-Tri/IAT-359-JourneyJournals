@@ -12,6 +12,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -24,6 +26,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
@@ -42,9 +46,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     final int REQUEST_CODE = 0;
 
     //camera stuff---------------
-
-
-    String currentPhotoPath;  // Add this variable
+    String currentPhotoPath;
+    private ImageView imageView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -141,6 +144,12 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 // Retrieve the photo path from the cursor
                 photo = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
 
+//                // Update currentPhotoPath based on the specific entry's photo path
+//                currentPhotoPath = photo;
+//                // Load and display images here if needed
+//                // use an image-loading library like Glide or Picasso
+//                imageView = findViewById(R.id.displayImageView);
+//                Glide.with(this).load(photo).into(imageView);
 
                 // Close the cursor
                 cursor.close();
@@ -177,12 +186,12 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
     //camera stuff------------
 
-    public void openCamera(View view) {
-    }
+//    public void openCamera(View view) {
+//    }
 
     public void displayPhoto(View view) {
         Intent i = new Intent(this, ViewImagesActivity.class);
-        i.putExtra ("photoPath", photo);
+        i.putExtra ("photoPath", currentPhotoPath);
         startActivity(i);
     }
 
@@ -206,7 +215,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
         }
 
-
+        loadDetailsFromDatabase();
     }
     protected void onPause(){
         super.onPause();
@@ -228,6 +237,12 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
             // Retrieve user settings and update UI
             retrieveUserSetting();
+
+//            // Load the full-sized image using the currentPhotoPath
+//            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//
+//            // Update the ImageView with the loaded image
+//            imageView.setImageBitmap(imageBitmap);
         }
     }
 

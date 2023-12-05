@@ -30,14 +30,14 @@
 
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/backButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="Done"
             android:onClick="goBack"
-            android:background="#B9F6C9"
+            android:background="@drawable/button_style"
             android:textSize="20sp" />
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -131,18 +133,46 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         String checklist = extra_data.getString("CHECKLIST_KEY");
 
         // Load the full-sized image using the currentPhotoPath
-        Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//        Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-        currentPhotoPath = extra_data.getString("photoPath");
+//        currentPhotoPath = extra_data.getString("photoPath");
+//        // Check if imageBitmap is null before proceeding
+//        if (imageBitmap != null) {
+//            // Save the image path to the database
+//            String imagePath = saveImageToFile(imageBitmap);
+//
+//            // make sure all fields are filled out before they can save the entry
+//            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
+//                Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
+//            } else {
+//                long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
+//                if (id < 0) {
+//                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
+//                }
+//                finish();
+//                Intent i = new Intent(this, MainActivity.class);
+//                startActivity(i);
+//            }
+//        } else {
+//            // Handle the case where imageBitmap is null
+//            Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
+//        }
+
         // Check if imageBitmap is null before proceeding
-        if (imageBitmap != null) {
-            // Save the image path to the database
-            String imagePath = saveImageToFile(imageBitmap);
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
+            Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
+        } else {
+            // Load the full-sized image using the currentPhotoPath
+            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-            // make sure all fields are filled out before they can save the entry
-            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
-                Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
-            } else {
+            // Check if imageBitmap is null before proceeding
+            if (imageBitmap != null) {
+                // Save the image path to the database
+                String imagePath = saveImageToFile(imageBitmap);
+
+                // Save the image path to the database
                 long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
                 if (id < 0) {
                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -152,10 +182,10 @@ public class NewJournalDetailActivity extends AppCompatActivity {
                 finish();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
+            } else {
+                // Handle the case where imageBitmap is null
+                Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            // Handle the case where imageBitmap is null
-            Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -215,8 +245,40 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+
+//        // Preserve the orientation information in the EXIF data
+//        saveOrientationToExif(image.getAbsolutePath());
         return image;
     }
+
+//    private void saveOrientationToExif(String imagePath) {
+//        try {
+//            ExifInterface exif = new ExifInterface(imagePath);
+//            int orientation = ExifInterface.ORIENTATION_NORMAL;
+//
+//            // Determine the orientation based on the device's camera sensor
+//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+//            switch (rotation) {
+//                case Surface.ROTATION_0:
+//                    orientation = ExifInterface.ORIENTATION_NORMAL;
+//                    break;
+//                case Surface.ROTATION_90:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
+//                    break;
+//                case Surface.ROTATION_180:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
+//                    break;
+//                case Surface.ROTATION_270:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
+//                    break;
+//            }
+//
+//            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
+//            exif.saveAttributes();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // Handle the permission request result
     @Override
@@ -302,9 +364,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
             // Retrieve user settings and update UI
             retrieveUserSetting();
-//hello
+
 //            // Get the captured image file
-//            File imageFile = new File(currentPhotoPath);
+            File imageFile = new File(currentPhotoPath);
 //
 //            // Save the image path to the database
 //            String name = journeyNameTV.getText().toString();
@@ -332,7 +394,21 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     }
 
     private String saveImageToFile(Bitmap bitmap) {
-        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
+//        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
+//        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
+//
+//        try {
+//            FileOutputStream fos = new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.close();
+//            return file.getAbsolutePath();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String fileName = "JPEG_" + timeStamp + "_";
+
         File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
 
         try {
