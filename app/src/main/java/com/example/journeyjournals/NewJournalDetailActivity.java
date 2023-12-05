@@ -247,38 +247,38 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         currentPhotoPath = image.getAbsolutePath();
 
 //        // Preserve the orientation information in the EXIF data
-//        saveOrientationToExif(image.getAbsolutePath());
+        saveOrientationToExif(image.getAbsolutePath());
         return image;
     }
 
-//    private void saveOrientationToExif(String imagePath) {
-//        try {
-//            ExifInterface exif = new ExifInterface(imagePath);
-//            int orientation = ExifInterface.ORIENTATION_NORMAL;
-//
-//            // Determine the orientation based on the device's camera sensor
-//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-//            switch (rotation) {
-//                case Surface.ROTATION_0:
-//                    orientation = ExifInterface.ORIENTATION_NORMAL;
-//                    break;
-//                case Surface.ROTATION_90:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
-//                    break;
-//                case Surface.ROTATION_180:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
-//                    break;
-//                case Surface.ROTATION_270:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
-//                    break;
-//            }
-//
-//            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
-//            exif.saveAttributes();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void saveOrientationToExif(String imagePath) {
+        try {
+            ExifInterface exif = new ExifInterface(imagePath);
+            int orientation = ExifInterface.ORIENTATION_NORMAL;
+
+            // Determine the orientation based on the device's camera sensor
+            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+            switch (rotation) {
+                case Surface.ROTATION_0:
+                    orientation = ExifInterface.ORIENTATION_NORMAL;
+                    break;
+                case Surface.ROTATION_90:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
+                    break;
+                case Surface.ROTATION_180:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
+                    break;
+                case Surface.ROTATION_270:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
+                    break;
+            }
+
+            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
+            exif.saveAttributes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Handle the permission request result
     @Override

@@ -19,15 +19,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.ExifInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
@@ -48,6 +57,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     //camera stuff---------------
     String currentPhotoPath;
     private ImageView imageView;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_CAMERA_PERMISSION = 2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -106,6 +117,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
             Log.d("NewJourneyActivity", "Light sensor registered");
         }
+        
     }
 
     public void saveData (View view) {
@@ -244,7 +256,78 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 //            // Update the ImageView with the loaded image
 //            imageView.setImageBitmap(imageBitmap);
         }
+
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+//            // Check if user disabled light sensor in settings
+//            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
+//
+//            // Retrieve user settings and update UI
+//            retrieveUserSetting();
+//
+//            // Get the captured image file
+//            File imageFile = new File(currentPhotoPath);
+//
+//            // Display the image with the correct orientation
+//            displayCapturedImage(imageFile);
+//            // Preserve the orientation information in the EXIF data
+//            saveOrientationToExif(imageFile.getAbsolutePath());
+//        }
     }
+
+//    private void displayCapturedImage(File imageFile) {
+//        // Load and display the image using an image-loading library like Glide or Picasso
+//        imageView = findViewById(R.id.displayImageView);
+//        Glide.with(this)
+//                .load(imageFile)
+//                .into(imageView);
+//    }
+//    private void saveOrientationToExif(String imagePath) {
+//        try {
+//            ExifInterface exif = new ExifInterface(imagePath);
+//            int orientation = ExifInterface.ORIENTATION_NORMAL;
+//
+//            // Determine the orientation based on the device's camera sensor
+//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+//            switch (rotation) {
+//                case Surface.ROTATION_0:
+//                    orientation = ExifInterface.ORIENTATION_NORMAL;
+//                    break;
+//                case Surface.ROTATION_90:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
+//                    break;
+//                case Surface.ROTATION_180:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
+//                    break;
+//                case Surface.ROTATION_270:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
+//                    break;
+//            }
+//
+//            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
+//            exif.saveAttributes();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        currentPhotoPath = image.getAbsolutePath();
+//
+////        // Preserve the orientation information in the EXIF data
+//        saveOrientationToExif(image.getAbsolutePath());
+//        return image;
+//    }
 
     private void retrieveUserSetting(){
 
