@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-// This class creates the tables for the database
+// This class creates the tables for the database and the schema
 public class MyHelper extends SQLiteOpenHelper {
 
     private Context context;

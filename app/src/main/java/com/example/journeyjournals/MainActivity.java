@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.journeyjournals.LightSensorFunction;
 import androidx.appcompat.app.AppCompatActivity;
+
+//the main activity serves as the main menu
 public class MainActivity extends AppCompatActivity {
 
     private TextView welcomeUser;
@@ -110,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
-
-
     }
 
     protected void onPause(){

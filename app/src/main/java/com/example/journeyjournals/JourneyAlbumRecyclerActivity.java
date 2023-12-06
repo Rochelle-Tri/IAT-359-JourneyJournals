@@ -51,6 +51,7 @@ public class JourneyAlbumRecyclerActivity extends AppCompatActivity implements A
         helper = new MyHelper(this);
         Cursor cursor = db.getData();
 
+        //if there is nothing in the database, show a message saying the album is empty
         emptyAlbum = (TextView)findViewById(R.id.emptyListTextView);
         if(helper.areAllColumnsEmpty(Constants.TABLE_NAME)){
             emptyAlbum.setVisibility(View.VISIBLE);

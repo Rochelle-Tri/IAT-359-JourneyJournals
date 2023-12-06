@@ -156,7 +156,6 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         firstName = firstNameEditText.getText().toString();
-        Toast.makeText(this, firstName, Toast.LENGTH_SHORT).show();
 
         SharedPreferences preferences = getSharedPreferences(MY_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

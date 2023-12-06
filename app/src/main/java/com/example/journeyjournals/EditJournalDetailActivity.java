@@ -30,8 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -120,6 +118,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         
     }
 
+    //when the user presses on the save button, the strings in the fields will get updated in the database
     public void saveData (View view) {
         String newName = journeyNameTV.getText().toString();
         String newLocation = journeyLocationTV.getText().toString();
@@ -132,6 +131,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes, newPhoto);
     }
 
+    //this method loads the data in this journal entry that the user first inserted when they made the entry
     private void loadDetailsFromDatabase() {
         MyHelper helper = new MyHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -156,13 +156,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 // Retrieve the photo path from the cursor
                 photo = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
 
-//                // Update currentPhotoPath based on the specific entry's photo path
-//                currentPhotoPath = photo;
-//                // Load and display images here if needed
-//                // use an image-loading library like Glide or Picasso
-//                imageView = findViewById(R.id.displayImageView);
-//                Glide.with(this).load(photo).into(imageView);
-
                 // Close the cursor
                 cursor.close();
             }
@@ -174,6 +167,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         }
     }
 
+    //this button deletes the journal entry
     public void deleteEntry(View view){
         db.deleteRow(entryId);
         Toast.makeText(this, "your journal entry has been deleted", Toast.LENGTH_SHORT).show();

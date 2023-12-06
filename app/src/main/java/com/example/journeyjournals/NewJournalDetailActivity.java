@@ -57,13 +57,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     private boolean lightSensorEnabled = true;
     final int REQUEST_CODE = 0;
 
-    //camera stuff ----------------------------------------------
-//    private RecyclerView photoRecyclerView;
-//    private LinearLayoutManager layoutManager;
-//    private PhotoAlbumAdapter photoAlbumAdapter;
-//
-//    private List<String> photoList = new ArrayList<>();
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 2;
     private Bitmap imageBitmap;
@@ -160,6 +153,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
 //        }
 
+        //check if all fields are filled out before data can be inserted in the database
         // Check if imageBitmap is null before proceeding
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
             Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
@@ -172,7 +166,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
                 // Save the image path to the database
                 String imagePath = saveImageToFile(imageBitmap);
 
-                // Save the image path to the database
+                // Save the image path and other fields to the database
                 long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
                 if (id < 0) {
                     Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -307,10 +301,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             // Handle the case where the currentPhotoPath is null (no photo captured)
             Toast.makeText(this, "No photo captured yet", Toast.LENGTH_SHORT).show();
         }
-
-
-        Log.d("NewJournalDetailActivity", "Displaying photo for entryId: " + entryId);
-
     }
 
 

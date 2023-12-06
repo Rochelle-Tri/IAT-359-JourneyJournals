@@ -16,10 +16,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//the user interacts with this activity once they start a new journal entry, they are asked to create a checklist first
 public class NewJourneyActivity extends AppCompatActivity {
 
     EditText journeyChecklist;
-    //MyDataBase db;
 
     //light sensor stuff-------------------------------------------
     private LightSensorFunction lightSensorFunction;
@@ -33,8 +33,6 @@ public class NewJourneyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_journey);
         journeyChecklist = (EditText)findViewById(R.id.checklistBoxTextView);
-
-        //db = new MyDataBase(this);
 
         //light sensor----------------------------------------------------------------------------------------------
         lightSensorFunction = new LightSensorFunction();
@@ -59,7 +57,7 @@ public class NewJourneyActivity extends AppCompatActivity {
         }
     }
 
-    //the user "starts their journey" after they finish writing their checklist
+    //the user "starts their journey" after they finish writing their checklist, they are taken the detailed view of the journey entry
     public void viewJourneyDetails (View view) {
 
         Log.d("NewJourneyActivity", "viewJourneyDetails called");
@@ -75,6 +73,7 @@ public class NewJourneyActivity extends AppCompatActivity {
 
     }
 
+// the following 2 methods are for the menu buttons
     public void cancelButton(View view){
         finish();
     }

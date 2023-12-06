@@ -68,17 +68,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         }
 
+        //when the user clicks on an entry they want to view, the app takes them to the detailed view to see all the info in it
+        //an entry ID number is sent to that view so that it knows which column from the database to display the info
         @Override
         public void onClick(View view) {
-            Toast.makeText(context,
-                    "You have clicked: " + ((TextView)view.findViewById(R.id.albumJourneyNameTextView)).getText().toString(),
-                    Toast.LENGTH_SHORT).show();
-
             int position = getAdapterPosition();
             Intent intent = new Intent (view.getContext(), EditJournalDetailActivity.class);
             intent.putExtra ("ITEM_KEY", position );
-
-//            intent.putExtra("entryId", entryId);
             view.getContext().startActivity(intent);
         }
     }
