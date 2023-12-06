@@ -5,28 +5,43 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.ExifInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class EditJournalDetailActivity extends AppCompatActivity {
     EditText journeyNameTV, journeyLocationTV, journeyDateTV, journeyDurationTV, journeyNotesTV;
 
-    String name, location, date, duration, notes, checklist;
+    String name, location, date, duration, notes, checklist, photo;
 
     String checklistData;
     private MyDataBase db;
@@ -39,6 +54,13 @@ public class EditJournalDetailActivity extends AppCompatActivity {
     private boolean lightSensorEnabled = true;
     final int REQUEST_CODE = 0;
 
+    //camera stuff---------------
+    String currentPhotoPath;
+    private ImageView imageView;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_CAMERA_PERMISSION = 2;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +89,8 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
             checklistData = checklist;
 
+            currentPhotoPath = photo;
+
         } else {
             // did not receive bundle with extra data
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
@@ -93,6 +117,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
             Log.d("NewJourneyActivity", "Light sensor registered");
         }
+        
     }
 
     public void saveData (View view) {
@@ -101,8 +126,10 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String newDate = journeyDateTV.getText().toString();
         String newDuration = journeyDurationTV.getText().toString();
         String newNotes = journeyNotesTV.getText().toString();
+        // Use the correct photo path
+        String newPhoto = currentPhotoPath;
         Toast.makeText(this, "your journal has been updated", Toast.LENGTH_SHORT).show();
-        db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes);
+        db.updateJournalEntry(entryId, newName, newLocation, newDate, newDuration, newNotes, newPhoto);
     }
 
     private void loadDetailsFromDatabase() {
@@ -113,7 +140,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         String selection = "_id=?";
         String[] selectionArgs = {String.valueOf(entryId)};
 
-        String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES};
+        String[] columns = {Constants.UID, Constants.NAME, Constants.LOCATION, Constants.CHECKLIST, Constants.DATE, Constants.DURATION, Constants.NOTES, Constants.PHOTO_PATH};
 
         try {
             Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
@@ -125,6 +152,16 @@ public class EditJournalDetailActivity extends AppCompatActivity {
                 duration = cursor.getString(cursor.getColumnIndexOrThrow(Constants.DURATION));
                 notes = cursor.getString(cursor.getColumnIndexOrThrow(Constants.NOTES));
                 checklist = cursor.getString(cursor.getColumnIndexOrThrow(Constants.CHECKLIST));
+
+                // Retrieve the photo path from the cursor
+                photo = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
+
+//                // Update currentPhotoPath based on the specific entry's photo path
+//                currentPhotoPath = photo;
+//                // Load and display images here if needed
+//                // use an image-loading library like Glide or Picasso
+//                imageView = findViewById(R.id.displayImageView);
+//                Glide.with(this).load(photo).into(imageView);
 
                 // Close the cursor
                 cursor.close();
@@ -158,21 +195,16 @@ public class EditJournalDetailActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-//    public void takePhotos(View view){
-//        Intent i = new Intent(this, CameraActivity.class);
-//        startActivity(i);
-//        Log.d("CameraActivity", "Failed to Start");
-//    }
-//    public void viewPhotos(View view){
-//        Toast.makeText(this, "Currently Work In Progress.", Toast.LENGTH_SHORT).show();
-//        Log.d("CameraActivity", "Test");
-//    }
 
-    public void openCamera(View view) {
-    }
+    //camera stuff------------
+
+//    public void openCamera(View view) {
+//    }
 
     public void displayPhoto(View view) {
-
+        Intent i = new Intent(this, ViewImagesActivity.class);
+        i.putExtra ("photoPath", currentPhotoPath);
+        startActivity(i);
     }
 
 
@@ -195,7 +227,7 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             sensorManager.registerListener(sensorListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
         }
 
-
+        loadDetailsFromDatabase();
     }
     protected void onPause(){
         super.onPause();
@@ -217,8 +249,85 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
             // Retrieve user settings and update UI
             retrieveUserSetting();
+
+//            // Load the full-sized image using the currentPhotoPath
+//            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//
+//            // Update the ImageView with the loaded image
+//            imageView.setImageBitmap(imageBitmap);
         }
+
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+//            // Check if user disabled light sensor in settings
+//            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
+//
+//            // Retrieve user settings and update UI
+//            retrieveUserSetting();
+//
+//            // Get the captured image file
+//            File imageFile = new File(currentPhotoPath);
+//
+//            // Display the image with the correct orientation
+//            displayCapturedImage(imageFile);
+//            // Preserve the orientation information in the EXIF data
+//            saveOrientationToExif(imageFile.getAbsolutePath());
+//        }
     }
+
+//    private void displayCapturedImage(File imageFile) {
+//        // Load and display the image using an image-loading library like Glide or Picasso
+//        imageView = findViewById(R.id.displayImageView);
+//        Glide.with(this)
+//                .load(imageFile)
+//                .into(imageView);
+//    }
+//    private void saveOrientationToExif(String imagePath) {
+//        try {
+//            ExifInterface exif = new ExifInterface(imagePath);
+//            int orientation = ExifInterface.ORIENTATION_NORMAL;
+//
+//            // Determine the orientation based on the device's camera sensor
+//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+//            switch (rotation) {
+//                case Surface.ROTATION_0:
+//                    orientation = ExifInterface.ORIENTATION_NORMAL;
+//                    break;
+//                case Surface.ROTATION_90:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
+//                    break;
+//                case Surface.ROTATION_180:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
+//                    break;
+//                case Surface.ROTATION_270:
+//                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
+//                    break;
+//            }
+//
+//            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
+//            exif.saveAttributes();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        currentPhotoPath = image.getAbsolutePath();
+//
+////        // Preserve the orientation information in the EXIF data
+//        saveOrientationToExif(image.getAbsolutePath());
+//        return image;
+//    }
 
     private void retrieveUserSetting(){
 
@@ -258,4 +367,6 @@ public class EditJournalDetailActivity extends AppCompatActivity {
 
         }
     };
+
+
 }

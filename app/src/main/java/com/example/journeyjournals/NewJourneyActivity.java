@@ -69,6 +69,7 @@ public class NewJourneyActivity extends AppCompatActivity {
         //go to details view of this journey after saving the checklist string into an intent bundle
         Intent intent = new Intent(this, NewJournalDetailActivity.class);
         intent.putExtra ("CHECKLIST_KEY", checkList);
+
         startActivity(intent);
         journeyChecklist.setText("");
 

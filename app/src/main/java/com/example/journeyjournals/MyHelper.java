@@ -20,7 +20,8 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.CHECKLIST + " TEXT, " +
                     Constants.DATE + " TEXT," +
                     Constants.DURATION + " TEXT, " +
-                    Constants.NOTES + " TEXT)";
+                    Constants.NOTES + " TEXT, " +
+                    Constants.PHOTO_PATH + " TEXT)";
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 
@@ -31,7 +32,7 @@ public class MyHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(CREATE_TABLE);
-            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
             Toast.makeText(context, "exception onCreate() db", Toast.LENGTH_LONG).show();
         }
@@ -66,4 +67,38 @@ public class MyHelper extends SQLiteOpenHelper {
         return true; // The table is empty
     }
 
+    //camera stuff---------------------------------------
+
+    // Method to retrieve the photo path for a given entry ID
+    public String getPhotoPath(long entryId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {Constants.PHOTO_PATH};
+        String selection = Constants.UID + "=?";
+        String[] selectionArgs = {String.valueOf(entryId)};
+
+        try {
+            Cursor cursor = db.query(
+                    Constants.TABLE_NAME,
+                    columns,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                String photoPath = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
+                cursor.close();
+                db.close();
+                return photoPath;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+
+        return null; // Return null if entry ID is not found or there's an error
+    }
 }

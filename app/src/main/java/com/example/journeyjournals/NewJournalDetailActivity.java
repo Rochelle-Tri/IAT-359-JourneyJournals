@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -67,6 +69,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     private Bitmap imageBitmap;
     private String currentPhotoPath;  // Add this variable
 
+    private int entryId; // Declare the entryId variable here
+
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -106,42 +111,13 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
         //camera activity ----------------------------------------------------------------------------------------------
 
-//        Log.d("NewJournalDetailActivity", "Checking: onCreate");
-//        // Handle camera photos
-//        setupPhotoRecyclerView();
-//
-//        // Initialize layoutManager
-//        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//
-//
-//        // Retrieve photo paths from intent extras
-//        ArrayList<String> photoPaths = getIntent().getStringArrayListExtra("photoList");
-//
-//        // Check if the intent contains the photoList
-//        if (photoPaths != null) {
-//            // Convert photo paths to Photo objects
-//            ArrayList<Photo> photoList = createPhotoListFromPaths(photoPaths);
-//
-//            if (photoList != null && !photoList.isEmpty()) {
-//                // Pass the list of photo paths to the adapter
-//                photoAlbumAdapter.setPhotoList(photoList);
-//            }
-//        } else {
-//            // Handle the case where the intent does not contain the photoList
-//            Log.d("NewJournalDetailActivity", "photoList not created");
-//        }
-
-        // Check and request camera permission at runtime
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            // Permission is not granted, request it
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA},
-//                    REQUEST_CAMERA_PERMISSION);
-
-//        }
-
-
+        // Retrieve the entry ID from Intent extras
+        Bundle extra_data = getIntent().getExtras();
+        if (extra_data != null) {
+            entryId = extra_data.getInt("entryId", -1);
+        } else {
+            Toast.makeText(this, "No entryId", Toast.LENGTH_SHORT).show();
+        }
 
     }
     public void saveData (View view) {
@@ -156,23 +132,60 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         Bundle extra_data = getIntent().getExtras();
         String checklist = extra_data.getString("CHECKLIST_KEY");
 
-        //make sure all fields are filled out before they can save the entry
-        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)){
+        // Load the full-sized image using the currentPhotoPath
+//        Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+//        currentPhotoPath = extra_data.getString("photoPath");
+//        // Check if imageBitmap is null before proceeding
+//        if (imageBitmap != null) {
+//            // Save the image path to the database
+//            String imagePath = saveImageToFile(imageBitmap);
+//
+//            // make sure all fields are filled out before they can save the entry
+//            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
+//                Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
+//            } else {
+//                long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
+//                if (id < 0) {
+//                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
+//                }
+//                finish();
+//                Intent i = new Intent(this, MainActivity.class);
+//                startActivity(i);
+//            }
+//        } else {
+//            // Handle the case where imageBitmap is null
+//            Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
+//        }
+
+        // Check if imageBitmap is null before proceeding
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
             Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            long id = db.insertData(name, location, date, duration, notes, checklist);
-            if (id < 0)
-            {
-                Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+        } else {
+            // Load the full-sized image using the currentPhotoPath
+            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+            // Check if imageBitmap is null before proceeding
+            if (imageBitmap != null) {
+                // Save the image path to the database
+                String imagePath = saveImageToFile(imageBitmap);
+
+                // Save the image path to the database
+                long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
+                if (id < 0) {
+                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            } else {
+                // Handle the case where imageBitmap is null
+                Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
             }
-            else
-            {
-                Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
-            }
-            finish();
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
         }
     }
 
@@ -182,60 +195,14 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     }
 
 
-//    public void takePhotos(View view){
-//        Intent i = new Intent(this, CameraActivity.class);
-//        // start CameraActivity using startActivityForResult
-//        startActivityForResult(i, REQUEST_CODE);
-//        Log.d("CameraActivity", "Failed to Start");
-//    }
-//
-//    public void viewPhotos(View view){
-//        // Retrieve photo paths from intent extras
-//        ArrayList<String> photoPaths = getIntent().getStringArrayListExtra("photoList");
-//
-//        // Log the size of the retrieved photoPaths
-////        Log.d("NewJournalDetailActivity", "Photo paths size before starting ViewImagesActivity: " + (photoPaths != null ? photoPaths.size() : 0));
-//
-//        if (photoPaths != null && !photoPaths.isEmpty()) {
-//            // Convert photo paths to Photo objects
-//            ArrayList<Photo> photoList = createPhotoListFromPaths(photoPaths);
-//
-//            Log.d("NewJournalDetailActivity", "viewPhotos: Photo paths size before starting ViewImagesActivity: " + (photoPaths != null ? photoPaths.size() : 0));
-//            Log.d("NewJournalDetailActivity", "viewPhotos: Photo paths content: " + (photoPaths != null ? photoPaths.toString() : "null"));
-//
-//            // Log the size of the photoList
-//            Log.d("NewJournalDetailActivity", "viewPhotos: Photo list size before starting ViewImagesActivity: " + (photoList != null ? photoList.size() : 0));
-//
-//            // Pass the list of photos to ViewImagesActivity
-//            Intent intent = new Intent(this, ViewImagesActivity.class);
-//            intent.putParcelableArrayListExtra("photoList", photoList);
-//            startActivity(intent);
-//
-//        } else {
-//            Log.e("NewJournalDetailActivity", "Error on viewPhotos click: Photo paths list is null or empty");
-//        }
-//
-//    }
-
     public void openCamera(View view) {
         // Check if camera permission is granted
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            // Permission is granted, open the camera
-//            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-//                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-//            }
-//        } else {
-//            // Permission is not granted, request it
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA},
-//                    REQUEST_CAMERA_PERMISSION);
-//        }
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
             // Permission is granted, open the camera
+
+            // Create an Intent for capturing an image
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             // Add the following lines to create a file for the photo
@@ -251,6 +218,9 @@ public class NewJournalDetailActivity extends AppCompatActivity {
                         "com.example.android.fileprovider",
                         photoFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+                // Add this code to start CameraActivity with the entryId as an extra
+                cameraIntent.putExtra("entryId", entryId);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
             }
         } else {
@@ -275,7 +245,39 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+
+//        // Preserve the orientation information in the EXIF data
+        saveOrientationToExif(image.getAbsolutePath());
         return image;
+    }
+
+    private void saveOrientationToExif(String imagePath) {
+        try {
+            ExifInterface exif = new ExifInterface(imagePath);
+            int orientation = ExifInterface.ORIENTATION_NORMAL;
+
+            // Determine the orientation based on the device's camera sensor
+            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+            switch (rotation) {
+                case Surface.ROTATION_0:
+                    orientation = ExifInterface.ORIENTATION_NORMAL;
+                    break;
+                case Surface.ROTATION_90:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
+                    break;
+                case Surface.ROTATION_180:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
+                    break;
+                case Surface.ROTATION_270:
+                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
+                    break;
+            }
+
+            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
+            exif.saveAttributes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Handle the permission request result
@@ -293,32 +295,8 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-//            imageBitmap = (Bitmap) data.getExtras().get("data");
-//            // Save or display the image as needed
-//
-//            // Start the second activity
-////            Intent intent = new Intent(this, DisplayPhotosActivity.class);
-////            intent.putExtra("imageBitmap", imageBitmap);
-////            startActivity(intent);
-//        }
-//    }
 
     public void displayPhoto(View view) {
-
-//        if (imageBitmap != null) {
-//            // Pass the imageBitmap to ViewImagesActivity
-//            Intent intent = new Intent(this, ViewImagesActivity.class);
-//            intent.putExtra("imageBitmap", imageBitmap);
-//            startActivity(intent);
-//        } else {
-//            // Handle the case where the imageBitmap is null (not captured)
-//            Toast.makeText(this, "No image captured yet", Toast.LENGTH_SHORT).show();
-//        }
 
         if (currentPhotoPath != null) {
             // Pass the currentPhotoPath to ViewImagesActivity
@@ -330,51 +308,10 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No photo captured yet", Toast.LENGTH_SHORT).show();
         }
 
+
+        Log.d("NewJournalDetailActivity", "Displaying photo for entryId: " + entryId);
+
     }
-
-    // Add viewImages -----------------------------------------------------------------------------------------------
-
-//    private void setupPhotoRecyclerView() {
-//        //initialize this first
-//        RecyclerView recyclerView = findViewById(R.id.photoRecyclerView);
-//        if (recyclerView != null) {
-//            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//            recyclerView.setLayoutManager(layoutManager);
-//
-//            // Retrieve photo paths from intent extras
-//            ArrayList<String> photoPaths = getIntent().getStringArrayListExtra("photoList");
-//
-//            // Convert photo paths to Photo objects
-//            ArrayList<PhotoDELETE> photoList = createPhotoListFromPaths(photoPaths);
-//
-//            if (photoList != null && !photoList.isEmpty()) {
-//                PhotoAlbumAdapter adapter = new PhotoAlbumAdapter(photoList);
-//                recyclerView.setAdapter(adapter);
-//            }
-//        }
-//    }
-//    public void viewImages(View view) {
-//        Intent intent = new Intent(this, ViewImagesActivity.class);
-//        // Pass the list of photos to ViewImagesActivity
-//        ArrayList<Photo> photos = createPhotoListFromPaths(getIntent().getStringArrayListExtra("photoList"));
-//        intent.putParcelableArrayListExtra("photoList", photos);
-//        startActivity(intent);
-//    }
-
-    // Other methods...
-
-//    private ArrayList<PhotoDELETE> createPhotoListFromPaths(ArrayList<String> photoPaths) {
-//        ArrayList<PhotoDELETE> photos = new ArrayList<>();
-//        if (photoPaths != null) {
-//            for (String path : photoPaths) {
-//                photos.add(new PhotoDELETE(path));
-//            }
-//        }
-//        // Log the size of the created photo list
-//        Log.d("NewJournalDetailActivity", "createPhotoListFromPaths: Created photo list size: " + photos.size());
-//
-//        return photos;
-//    }
 
 
     //light sensor code ---------------------------------------------------------------------------------------------
@@ -416,42 +353,62 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
             // Retrieve user settings and update UI
             retrieveUserSetting();
-
-//            // Update the photoList with the new photo path
-//            ArrayList<String> receivedPhotoPaths = data.getStringArrayListExtra("photoList");
-//            Log.d("NewJournalDetailActivity", "Received photo paths: " + (receivedPhotoPaths != null ? receivedPhotoPaths.toString() : "null"));
-//
-//            if (receivedPhotoPaths != null && !receivedPhotoPaths.isEmpty()) {
-//                // Process the receivedPhotoPaths
-//                Log.d("NewJournalDetailActivity", "Received photo paths size: " + receivedPhotoPaths.size());
-//
-//                // For example, convert received photo paths to Photo objects if needed
-//                ArrayList<Photo> receivedPhotoList = createPhotoListFromPaths(receivedPhotoPaths);
-//                Log.d("NewJournalDetailActivity", "Received photo list size after conversion: " + (receivedPhotoList != null ? receivedPhotoList.size() : 0));
-//
-//                //  use receivedPhotoList in your logic
-//
-//                // Ensure that the adapter is correctly updated
-//                if (photoAlbumAdapter != null) {
-//                    photoAlbumAdapter.setPhotoList(receivedPhotoList);
-//                }
-//            } else {
-//                Log.e("NewJournalDetailActivity", "Received photo paths list is null or empty");
-//            }
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
 //            imageBitmap = (Bitmap) data.getExtras().get("data");
 //            String imagePath = saveImageToFile(imageBitmap);
 
+            // Check if user disabled light sensor in settings
+            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
+
+            // Retrieve user settings and update UI
+            retrieveUserSetting();
+
+//            // Get the captured image file
+            File imageFile = new File(currentPhotoPath);
+//
+//            // Save the image path to the database
+//            String name = journeyNameTV.getText().toString();
+//            String location = journeyLocationTV.getText().toString();
+//            String date = journeyDateTV.getText().toString();
+//            String duration = journeyDurationTV.getText().toString();
+//            String notes = journeyNotesTV.getText().toString();
+//
+//            // get the checklist data from the previous page
+//            Bundle extra_data = getIntent().getExtras();
+//            String checklist = extra_data.getString("CHECKLIST_KEY");
+
             // Load the full-sized image using the currentPhotoPath
             Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
+//            long id = db.insertData(name, location, date, duration, notes, checklist, currentPhotoPath);
+//
+//            // Handle the result
+//            if (id < 0) {
+//                Toast.makeText(this, "Failed to save journal entry with image", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(this, "Journal entry with image saved successfully", Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 
     private String saveImageToFile(Bitmap bitmap) {
-        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
+//        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
+//        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
+//
+//        try {
+//            FileOutputStream fos = new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.close();
+//            return file.getAbsolutePath();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String fileName = "JPEG_" + timeStamp + "_";
+
         File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
 
         try {
