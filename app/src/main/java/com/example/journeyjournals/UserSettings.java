@@ -61,10 +61,13 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         int selectedColor;
+        // checks if the radio button with ID RADIO_ON_ID is checked
         if (checkedId == RADIO_ON_ID) {
+            // checked, the selectedColor set to Color.WHITE
             selectedColor = Color.BLACK;
             Log.d("UserSettings", "Dark Mode: On");
         } else {
+            // not checked, the selectedColor set to Color.WHITE
             selectedColor = Color.WHITE;
             Log.d("UserSettings", "Dark Mode: Off");
         }
@@ -72,11 +75,13 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
 //        saveSelectedColor(selectedColor);
         getWindow().getDecorView().setBackgroundColor(selectedColor);
 
-        boolean lightSensorEnabled = (checkedId == RADIO_ON_ID);
+        //declares a boolean variable lightSensorEnabled and initializes it with the result of the expression
+        boolean lightSensorEnabled = (checkedId == RADIO_ON_ID); // checks whether a radio button with the ID RADIO_ON_ID is checked
         saveLightSensorSetting(lightSensorEnabled);
 
-        int styleResId = (lightSensorEnabled) ? R.style.DarkModeTextStyle : R.style.LightModeTextStyle;
-        applyTextStyleToViews(styleResId);
+        //If lightSensorEnabled is true, sets styleResId to R.style.DarkModeTextStyle
+        int styleResId = (lightSensorEnabled) ? R.style.DarkModeTextStyle : R.style.LightModeTextStyle; //might change based on whether the light sensor is enabled or not
+        applyTextStyleToViews(styleResId); // applies the selected text style (styleResId) to the views in the user interface
 
         Log.d("UserSettings", "Light Sensor Enabled: " + lightSensorEnabled);
     }
@@ -113,6 +118,7 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //this is if the user presses the cancel button
     public void goBack(View view){
 //        Intent i = new Intent(this, MainActivity.class);
 //        startActivity(i);
@@ -131,11 +137,13 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    //this is if the user presses the save data button
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         firstName = firstNameEditText.getText().toString();
 
+        //when user is done inputting their name and turning light sensor on/off, upon click it will save their preferences
         SharedPreferences preferences = getSharedPreferences(MY_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("First Name", firstName);

@@ -91,11 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void welcomeUserData(){
-//        if (firstName_entered!= null){
-//            welcomeUser.setText("Welcome " + firstName_entered);
-//        }
-//    }
+
     protected void onResume(){
         super.onResume();
 //        welcomeUserData();

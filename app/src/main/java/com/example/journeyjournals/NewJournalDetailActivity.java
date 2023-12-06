@@ -102,7 +102,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             Log.d("NewJourneyActivity", "Light sensor registered");
         }
 
-        //camera activity ----------------------------------------------------------------------------------------------
 
         // Retrieve the entry ID from Intent extras
         Bundle extra_data = getIntent().getExtras();
@@ -125,8 +124,8 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         Bundle extra_data = getIntent().getExtras();
         String checklist = extra_data.getString("CHECKLIST_KEY");
 
-        //check if all fields are filled out before data can be inserted in the database
-        // Check if imageBitmap is null before proceeding
+        // check if all fields are filled out before data can be inserted in the database
+        // cCheck if imageBitmap is null before proceeding
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
             Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
         } else {
@@ -162,16 +161,16 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
 
     public void openCamera(View view) {
-        // Check if camera permission is granted
+        // check if camera permission is granted
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
-            // Permission is granted, open the camera
+            // permission is granted, open the camera
 
             // Create an Intent for capturing an image
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            // Add the following lines to create a file for the photo
+            // creates a file for the photo
             File photoFile = null;
             try {
                 photoFile = createImageFile();
@@ -185,12 +184,12 @@ public class NewJournalDetailActivity extends AppCompatActivity {
                         photoFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
-                // Add this code to start CameraActivity with the entryId as an extra
+                // starts CameraActivity with the entryId as an extra
                 cameraIntent.putExtra("entryId", entryId);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
             }
         } else {
-            // Permission is not granted, request it
+            // permission is not granted, request it
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     REQUEST_CAMERA_PERMISSION);
@@ -212,7 +211,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
 
-//        // Preserve the orientation information in the EXIF data
+        // save the orientation information in the EXIF data
         saveOrientationToExif(image.getAbsolutePath());
         return image;
     }
@@ -222,7 +221,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             ExifInterface exif = new ExifInterface(imagePath);
             int orientation = ExifInterface.ORIENTATION_NORMAL;
 
-            // Determine the orientation based on the device's camera sensor
+            // find the orientation based on the device's camera sensor
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             switch (rotation) {
                 case Surface.ROTATION_0:
@@ -276,8 +275,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
     }
 
 
-    //light sensor code ---------------------------------------------------------------------------------------------
-
     @Override
     protected void onResume(){
         super.onResume();
@@ -325,7 +322,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
             // Retrieve user settings and update UI
             retrieveUserSetting();
 
-//            // Get the captured image file
+            // Get the captured image file
             File imageFile = new File(currentPhotoPath);
 
             Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
@@ -358,7 +355,7 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
         int backgroundColor = preferences.getInt("backgroundColor", DEFAULT_COLOR);
         Log.d("NewJourneyActivity", "Retrieved Background Color: " + backgroundColor);
-        Log.d("NewJourneyActivity", "I am being called");
+
         updateBackgroundColor(backgroundColor);
 
     }

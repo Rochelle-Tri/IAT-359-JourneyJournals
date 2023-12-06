@@ -44,7 +44,7 @@ public class ViewImagesActivity extends AppCompatActivity {
 
         // Retrieve the photo path from the intent
         photoPath = getIntent().getStringExtra("photoPath");
-        
+
         // Use 'photoPath' to display the image
         if (photoPath != null && !photoPath.isEmpty()) {
             // Use your preferred method to load and display the image, for example, using an image loading library like Glide
