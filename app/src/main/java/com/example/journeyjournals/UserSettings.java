@@ -58,15 +58,6 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
 
     }
 
-//    public void saveData(View view){
-//        Intent i = new Intent(this, MainActivity.class);
-//        startActivity(i);
-//    }
-
-//    private class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener{
-//
-//    }
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         int selectedColor;
@@ -105,13 +96,6 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         editor.apply();
     }
 
-//    private int getInitialBackgroundColor() {
-//        SharedPreferences preferences = getSharedPreferences(MY_PREFS, MODE_PRIVATE);
-//        Log.d("UserSettingsCheck", "Is being returned");
-//        return preferences.getInt("BackgroundColor", DEFAULT_COLOR);
-//
-//    }
-
     private void applyTextStyleToViews(int styleResId) {
         // Dynamically find and update the style for all TextViews
         ViewGroup rootView = findViewById(android.R.id.content);
@@ -139,16 +123,11 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         saveResult.putExtra("LightSensorEnabled", lightSensorEnabled);
         setResult(RESULT_OK, saveResult);
 
-        // Update background color based on the light sensor setting
+        // update background color based on the light sensor setting
         int backgroundColor = (lightSensorEnabled) ? Color.WHITE : Color.WHITE;
         saveSelectedColor(backgroundColor);
 
-//        LinearLayout mainLayout = findViewById(R.id.activity_main);
-//        if (mainLayout != null) {
-//            mainLayout.setBackgroundColor(backgroundColor);
-//        }
-
-        // Finish the activity
+        // finish the activity
         finish();
     }
 
@@ -182,12 +161,6 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
 //        getWindow().getDecorView().setBackgroundColor(selectedColor);
         saveSelectedColor(selectedColor);
 
-//        Intent retrieveIntent = getIntent();
-//        retrieveIntent.putExtra("First Name", firstName);
-//        getWindow().getDecorView().setBackgroundColor(selectedColor);
-//        retrieveIntent.putExtra("BackgroundColor", selectedColor);
-//        setResult(RESULT_OK, retrieveIntent);
-//        getWindow().getDecorView().setBackgroundColor(selectedColor);
         finish();
     }
 

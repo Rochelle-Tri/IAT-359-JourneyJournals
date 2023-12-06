@@ -7,15 +7,12 @@ import android.os.Parcelable;
 public class PhotoModel implements Parcelable {
     private Bitmap photo;
 
-
-
     public PhotoModel(Bitmap photo) {
         this.photo = photo;
     }
 
     protected PhotoModel(Parcel in) {
-        // Read data from Parcel and populate your object
-        // For example: photo = in.readParcelable(Bitmap.class.getClassLoader());
+        // read data from Parcel and populate your object
     }
 
     public static final Parcelable.Creator<PhotoModel> CREATOR = new Parcelable.Creator<PhotoModel>() {
@@ -41,8 +38,7 @@ public class PhotoModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // Write data to Parcel
-        // For example: dest.writeParcelable(photo, flags);
+        // write data to Parcel
     }
 }
 

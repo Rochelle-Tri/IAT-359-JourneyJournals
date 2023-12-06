@@ -241,87 +241,12 @@ public class EditJournalDetailActivity extends AppCompatActivity {
             // Check if user disabled light sensor in settings
             lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
 
-            // Retrieve user settings and update UI
             retrieveUserSetting();
 
-//            // Load the full-sized image using the currentPhotoPath
-//            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
-//
-//            // Update the ImageView with the loaded image
-//            imageView.setImageBitmap(imageBitmap);
         }
 
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-//            // Check if user disabled light sensor in settings
-//            lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
-//
-//            // Retrieve user settings and update UI
-//            retrieveUserSetting();
-//
-//            // Get the captured image file
-//            File imageFile = new File(currentPhotoPath);
-//
-//            // Display the image with the correct orientation
-//            displayCapturedImage(imageFile);
-//            // Preserve the orientation information in the EXIF data
-//            saveOrientationToExif(imageFile.getAbsolutePath());
-//        }
     }
 
-//    private void displayCapturedImage(File imageFile) {
-//        // Load and display the image using an image-loading library like Glide or Picasso
-//        imageView = findViewById(R.id.displayImageView);
-//        Glide.with(this)
-//                .load(imageFile)
-//                .into(imageView);
-//    }
-//    private void saveOrientationToExif(String imagePath) {
-//        try {
-//            ExifInterface exif = new ExifInterface(imagePath);
-//            int orientation = ExifInterface.ORIENTATION_NORMAL;
-//
-//            // Determine the orientation based on the device's camera sensor
-//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-//            switch (rotation) {
-//                case Surface.ROTATION_0:
-//                    orientation = ExifInterface.ORIENTATION_NORMAL;
-//                    break;
-//                case Surface.ROTATION_90:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_90;
-//                    break;
-//                case Surface.ROTATION_180:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_180;
-//                    break;
-//                case Surface.ROTATION_270:
-//                    orientation = ExifInterface.ORIENTATION_ROTATE_270;
-//                    break;
-//            }
-//
-//            exif.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(orientation));
-//            exif.saveAttributes();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private File createImageFile() throws IOException {
-//        // Create an image file name
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-//        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                storageDir      /* directory */
-//        );
-//
-//        // Save a file: path for use with ACTION_VIEW intents
-//        currentPhotoPath = image.getAbsolutePath();
-//
-////        // Preserve the orientation information in the EXIF data
-//        saveOrientationToExif(image.getAbsolutePath());
-//        return image;
-//    }
 
     private void retrieveUserSetting(){
 

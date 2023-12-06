@@ -125,34 +125,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         Bundle extra_data = getIntent().getExtras();
         String checklist = extra_data.getString("CHECKLIST_KEY");
 
-        // Load the full-sized image using the currentPhotoPath
-//        Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
-
-//        currentPhotoPath = extra_data.getString("photoPath");
-//        // Check if imageBitmap is null before proceeding
-//        if (imageBitmap != null) {
-//            // Save the image path to the database
-//            String imagePath = saveImageToFile(imageBitmap);
-//
-//            // make sure all fields are filled out before they can save the entry
-//            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
-//                Toast.makeText(this, "Please input all fields before saving", Toast.LENGTH_SHORT).show();
-//            } else {
-//                long id = db.insertData(name, location, date, duration, notes, checklist, imagePath);
-//                if (id < 0) {
-//                    Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(this, "Your journal entry was created", Toast.LENGTH_SHORT).show();
-//                }
-//                finish();
-//                Intent i = new Intent(this, MainActivity.class);
-//                startActivity(i);
-//            }
-//        } else {
-//            // Handle the case where imageBitmap is null
-//            Toast.makeText(this, "Failed to load image. Please try again.", Toast.LENGTH_SHORT).show();
-//        }
-
         //check if all fields are filled out before data can be inserted in the database
         // Check if imageBitmap is null before proceeding
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(location) || TextUtils.isEmpty(date) || TextUtils.isEmpty(duration)) {
@@ -346,8 +318,6 @@ public class NewJournalDetailActivity extends AppCompatActivity {
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-//            imageBitmap = (Bitmap) data.getExtras().get("data");
-//            String imagePath = saveImageToFile(imageBitmap);
 
             // Check if user disabled light sensor in settings
             lightSensorEnabled = data.getBooleanExtra("LightSensorEnabled", true);
@@ -357,45 +327,14 @@ public class NewJournalDetailActivity extends AppCompatActivity {
 
 //            // Get the captured image file
             File imageFile = new File(currentPhotoPath);
-//
-//            // Save the image path to the database
-//            String name = journeyNameTV.getText().toString();
-//            String location = journeyLocationTV.getText().toString();
-//            String date = journeyDateTV.getText().toString();
-//            String duration = journeyDurationTV.getText().toString();
-//            String notes = journeyNotesTV.getText().toString();
-//
-//            // get the checklist data from the previous page
-//            Bundle extra_data = getIntent().getExtras();
-//            String checklist = extra_data.getString("CHECKLIST_KEY");
 
-            // Load the full-sized image using the currentPhotoPath
             Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-//            long id = db.insertData(name, location, date, duration, notes, checklist, currentPhotoPath);
-//
-//            // Handle the result
-//            if (id < 0) {
-//                Toast.makeText(this, "Failed to save journal entry with image", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this, "Journal entry with image saved successfully", Toast.LENGTH_SHORT).show();
-//            }
         }
     }
 
     private String saveImageToFile(Bitmap bitmap) {
-//        String fileName = "your_image_file_name.jpg"; // Change the file name as needed
-//        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
-//
-//        try {
-//            FileOutputStream fos = new FileOutputStream(file);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//            fos.close();
-//            return file.getAbsolutePath();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
+
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String fileName = "JPEG_" + timeStamp + "_";
 

@@ -39,20 +39,12 @@ public class ViewImagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_photos);
 
+        // Load and set the image in the ImageView
         imageView = findViewById(R.id.displayImageView);
 
         // Retrieve the photo path from the intent
         photoPath = getIntent().getStringExtra("photoPath");
-
-        // Load and set the image in the ImageView
-//        if (photoPath != null) {
-//            Bitmap imageBitmap = BitmapFactory.decodeFile(photoPath);
-//            imageView.setImageBitmap(imageBitmap);
-//        } else {
-//            // Handle the case where the photoPath is null
-//            Log.e("ViewImagesActivity", "Photo path is null");
-//            finish(); // Finish the activity if no photo path is available
-//        }
+        
         // Use 'photoPath' to display the image
         if (photoPath != null && !photoPath.isEmpty()) {
             // Use your preferred method to load and display the image, for example, using an image loading library like Glide
@@ -75,18 +67,6 @@ public class ViewImagesActivity extends AppCompatActivity {
 
 
     }
-
-    // When a new photo is captured and you want to update the RecyclerView
-    private void updateRecyclerView(Bitmap newImageBitmap) {
-        // Add the new image to the photoList
-
-    }
-
-    // Call this method whenever you want to update the RecyclerView with a new photo
-    // For example, you can call this from a button click or from onActivityResult
-//    private void onNewPhotoCaptured(Bitmap newImageBitmap) {
-//        updateRecyclerView(newImageBitmap);
-//    }
 
     public void goBack(View view){
 
